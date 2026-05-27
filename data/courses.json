@@ -1,0 +1,484 @@
+[
+  {
+    "trade": "General Labourer",
+    "slug": "general-labourer",
+    "description": "The General Labourer qualification provides the foundational knowledge and practical skills required to perform essential tasks on construction sites. This includes understanding health and safety protocols, manual handling, and basic site maintenance. It is the perfect entry point for those looking to start a career in construction.",
+    "benefits": [
+      "Access to construction sites across the UK with a Green CSCS Card",
+      "Foundational knowledge of health, safety, and environmental practices",
+      "Increased employability in a high-demand sector",
+      "A stepping stone to specialized trades and advanced qualifications"
+    ],
+    "info": "To obtain the Green Labourer CSCS card, candidates must first complete the Health, Safety & Environment Test. This ensures all workers understand the fundamental risks and safety procedures before entering a live site.",
+    "levels": [
+      {
+        "id": "gen-lab-1",
+        "level": 1,
+        "course": "Health, Safety & Environment Test",
+        "card": "Green CSCS Card",
+        "tier": "Labourer",
+        "bookingType": "booking",
+        "price": 50
+      }
+    ]
+  },
+  {
+    "trade": "Carpentry",
+    "slug": "carpentry",
+    "description": "Carpentry qualifications are designed for individuals working with wood and timber in the construction industry. From structural framing to fine finishing and joinery, these courses validate your practical skills and theoretical knowledge, ensuring you meet industry standards.",
+    "benefits": [
+      "Official recognition of your carpentry skills (Blue or Gold CSCS Card)",
+      "Higher earning potential as a skilled or advanced craft worker",
+      "Opportunity to work on complex residential and commercial projects",
+      "Pathway to supervisory and management roles"
+    ],
+    "info": "Carpenters can choose between Level 2 for skilled work and Level 3 for advanced craft. Assessment is typically done on-site, minimizing disruption to your working schedule.",
+    "levels": [
+      {
+        "id": "carp-2",
+        "level": 2,
+        "course": "NVQ Level 2 Carpentry",
+        "card": "Blue CSCS Card",
+        "tier": "Skilled Worker",
+        "bookingType": "booking",
+        "price": 60
+      },
+      {
+        "id": "carp-3",
+        "level": 3,
+        "course": "NVQ Level 3 Carpentry",
+        "card": "Gold CSCS Card",
+        "tier": "Advanced Craft",
+        "bookingType": "booking",
+        "price": 75
+      }
+    ]
+  },
+  {
+    "trade": "Bricklaying",
+    "slug": "bricklaying",
+    "description": "Bricklaying is a core construction trade. These NVQs confirm your competence in constructing brick and block walls, understanding mortar mixes, and reading technical drawings. Achieving these qualifications proves you are a reliable and skilled tradesperson.",
+    "benefits": [
+      "Validates your expertise in brick and blockwork",
+      "Essential for securing contracts on major construction sites",
+      "Gain the Blue or Gold CSCS card to prove your competence",
+      "Demonstrates adherence to safety and quality standards"
+    ],
+    "info": "The NVQ Level 2 is suitable for those performing standard bricklaying tasks, while Level 3 is intended for those handling complex masonry work and supervising others.",
+    "levels": [
+      {
+        "id": "brick-2",
+        "level": 2,
+        "course": "NVQ Level 2 Bricklaying",
+        "card": "Blue CSCS Card",
+        "tier": "Skilled Worker",
+        "bookingType": "booking",
+        "price": 60
+      },
+      {
+        "id": "brick-3",
+        "level": 3,
+        "course": "NVQ Level 3 Bricklaying",
+        "card": "Gold CSCS Card",
+        "tier": "Advanced Craft",
+        "bookingType": "booking",
+        "price": 75
+      }
+    ]
+  },
+  {
+    "trade": "Painting & Decorating",
+    "slug": "painting-decorating",
+    "description": "This qualification assesses your ability to prepare surfaces and apply paint, wallpaper, and other finishes to high standards. It covers both domestic and commercial environments, ensuring you have the versatility required by modern contractors.",
+    "benefits": [
+      "Prove your ability to deliver high-quality finishing work",
+      "Gain access to commercial sites requiring CSCS certification",
+      "Expand your service offerings with advanced techniques (Level 3)",
+      "Build trust with clients through verified credentials"
+    ],
+    "info": "Assessors will review your work on-site, looking at surface preparation, application techniques, and health and safety compliance.",
+    "levels": [
+      {
+        "id": "paint-2",
+        "level": 2,
+        "course": "NVQ Level 2 Painting & Decorating",
+        "card": "Blue CSCS Card",
+        "tier": "Skilled Worker",
+        "bookingType": "booking",
+        "price": 60
+      },
+      {
+        "id": "paint-3",
+        "level": 3,
+        "course": "NVQ Level 3 Painting & Decorating",
+        "card": "Gold CSCS Card",
+        "tier": "Advanced Craft",
+        "bookingType": "booking",
+        "price": 75
+      }
+    ]
+  },
+  {
+    "trade": "Plastering",
+    "slug": "plastering",
+    "description": "Plastering NVQs confirm your skills in applying plaster to walls and ceilings, ensuring smooth finishes ready for decorating. This trade is crucial for the interior completion of any building project.",
+    "benefits": [
+      "Official recognition as a skilled plasterer",
+      "Eligibility for the Blue CSCS Skilled Worker Card",
+      "Demonstrates competence in both solid and fibrous plastering",
+      "Increases job security and earning potential"
+    ],
+    "info": "This Level 2 NVQ requires you to demonstrate your practical skills in a real working environment, proving you can meet commercial standards.",
+    "levels": [
+      {
+        "id": "plast-2",
+        "level": 2,
+        "course": "NVQ Level 2 Plastering",
+        "card": "Blue CSCS Card",
+        "tier": "Skilled Worker",
+        "bookingType": "booking",
+        "price": 60
+      }
+    ]
+  },
+  {
+    "trade": "Roofing",
+    "slug": "roofing",
+    "description": "Roofing qualifications cover the installation and repair of various roof types, including slate, tile, and flat roofs. Safety is paramount in this trade, and these NVQs ensure you operate safely at height while delivering durable results.",
+    "benefits": [
+      "Proves your competence in working safely at height",
+      "Validates skills in specific roofing disciplines (slating, tiling, etc.)",
+      "Required for access to most commercial roofing projects",
+      "Pathway from skilled worker to advanced craft"
+    ],
+    "info": "Roofing NVQs are highly specialized. Candidates must ensure they select the correct pathway (e.g., roof slating and tiling) that matches their daily work.",
+    "levels": [
+      {
+        "id": "roof-2",
+        "level": 2,
+        "course": "NVQ Level 2 Roofing",
+        "card": "Blue CSCS Card",
+        "tier": "Skilled Worker",
+        "bookingType": "booking",
+        "price": 60
+      },
+      {
+        "id": "roof-3",
+        "level": 3,
+        "course": "NVQ Level 3 Roofing",
+        "card": "Gold CSCS Card",
+        "tier": "Advanced Craft",
+        "bookingType": "booking",
+        "price": 75
+      }
+    ]
+  },
+  {
+    "trade": "Flooring",
+    "slug": "flooring",
+    "description": "Floorcovering NVQs assess your ability to prepare sub-floors and install various materials, including carpets, vinyl, and laminate. It highlights your attention to detail and understanding of different material properties.",
+    "benefits": [
+      "Certification of your specialized floor fitting skills",
+      "Eligibility for the Blue CSCS Card",
+      "Proof of understanding of sub-floor preparation and moisture testing",
+      "Enhanced reputation among contractors and clients"
+    ],
+    "info": "Assessments will cover the entire process, from initial site assessment and preparation to the final installation and finishing of the floor covering.",
+    "levels": [
+      {
+        "id": "floor-2",
+        "level": 2,
+        "course": "NVQ Level 2 Floorcovering",
+        "card": "Blue CSCS Card",
+        "tier": "Skilled Worker",
+        "bookingType": "booking",
+        "price": 60
+      }
+    ]
+  },
+  {
+    "trade": "Wall & Floor Tiling",
+    "slug": "tiling",
+    "description": "This qualification proves your precision and skill in fixing tiles to walls and floors. It covers surface preparation, cutting tiles, and applying grout, ensuring high-quality, durable finishes in kitchens, bathrooms, and commercial spaces.",
+    "benefits": [
+      "Validates your precision and technical tiling skills",
+      "Access to commercial sites with the Blue CSCS Card",
+      "Demonstrates knowledge of different tile materials and adhesives",
+      "Increases your value as a specialist tradesperson"
+    ],
+    "info": "Candidates will be assessed on their ability to set out and fix tiles to both complex and standard backgrounds, ensuring alignment and a professional finish.",
+    "levels": [
+      {
+        "id": "tile-2",
+        "level": 2,
+        "course": "NVQ Level 2 Wall & Floor Tiling",
+        "card": "Blue CSCS Card",
+        "tier": "Skilled Worker",
+        "bookingType": "booking",
+        "price": 60
+      }
+    ]
+  },
+  {
+    "trade": "Dry Lining",
+    "slug": "dry-lining",
+    "description": "Dry Lining involves installing plasterboard to form walls and ceilings. This NVQ confirms your ability to measure, cut, and fix boards accurately, as well as applying finishing techniques like taping and jointing.",
+    "benefits": [
+      "Official recognition of your dry lining and finishing skills",
+      "Required for work on modern, fast-paced construction sites",
+      "Eligibility for the Blue CSCS Card",
+      "Demonstrates your ability to work safely and efficiently"
+    ],
+    "info": "This qualification is ideal for interior systems specialists. It covers both fixing the boards and the subsequent finishing processes.",
+    "levels": [
+      {
+        "id": "dry-2",
+        "level": 2,
+        "course": "NVQ Level 2 Dry Lining",
+        "card": "Blue CSCS Card",
+        "tier": "Skilled Worker",
+        "bookingType": "booking",
+        "price": 60
+      }
+    ]
+  },
+  {
+    "trade": "Scaffolding",
+    "slug": "scaffolding",
+    "description": "Scaffolding is a high-risk trade that requires strict adherence to safety regulations. These qualifications prove your competence in erecting, altering, and dismantling scaffolding structures safely and securely.",
+    "benefits": [
+      "Essential for legally operating as a scaffolder on UK sites",
+      "Gain your CISRS/CSCS Scaffolder or Advanced Scaffolder card",
+      "Proves your thorough understanding of temporary works and safety",
+      "Unlocks high-paying roles in commercial and industrial sectors"
+    ],
+    "info": "Level 2 covers standard scaffolding structures, while Level 3 (Advanced) covers complex temporary works, including suspended and cantilever scaffolds.",
+    "levels": [
+      {
+        "id": "scaff-2",
+        "level": 2,
+        "course": "NVQ Level 2 Scaffolding",
+        "card": "Blue CSCS Card",
+        "tier": "Scaffolder",
+        "bookingType": "booking",
+        "price": 60
+      },
+      {
+        "id": "scaff-3",
+        "level": 3,
+        "course": "NVQ Level 3 Scaffolding",
+        "card": "Gold CSCS Card",
+        "tier": "Advanced Scaffolder",
+        "bookingType": "contact",
+        "price": 0
+      }
+    ]
+  },
+  {
+    "trade": "Groundworks",
+    "slug": "groundworks",
+    "description": "Groundworkers prepare the site before the main construction begins. This NVQ validates your skills in excavation, laying foundations, installing drainage, and hard landscaping, which are critical for the stability of any structure.",
+    "benefits": [
+      "Proves your competence in essential site preparation tasks",
+      "Eligibility for the Blue CSCS Skilled Worker Card",
+      "Validates your knowledge of underground services and safety",
+      "Increases your employability at the start of any major project"
+    ],
+    "info": "Assessments will cover safe digging practices, interpreting utility plans, and the physical execution of groundwork tasks.",
+    "levels": [
+      {
+        "id": "ground-2",
+        "level": 2,
+        "course": "NVQ Level 2 Groundworks",
+        "card": "Blue CSCS Card",
+        "tier": "Groundworker",
+        "bookingType": "booking",
+        "price": 60
+      }
+    ]
+  },
+  {
+    "trade": "Steel Fixing",
+    "slug": "steel-fixing",
+    "description": "Steel fixers position and secure steel reinforcing bars (rebar) and mesh in concrete structures. This qualification ensures you can interpret complex structural drawings and assemble reinforcement securely.",
+    "benefits": [
+      "Official recognition of your steel fixing skills",
+      "Crucial for working on large-scale civil engineering and commercial projects",
+      "Eligibility for the Blue CSCS Card",
+      "Demonstrates your ability to work with heavy materials safely"
+    ],
+    "info": "The NVQ focuses on your ability to read bending schedules, cut and bend reinforcement, and fix it in place prior to concrete pouring.",
+    "levels": [
+      {
+        "id": "steel-2",
+        "level": 2,
+        "course": "NVQ Level 2 Steel Fixing",
+        "card": "Blue CSCS Card",
+        "tier": "Steel Fixer",
+        "bookingType": "booking",
+        "price": 60
+      }
+    ]
+  },
+  {
+    "trade": "Formwork",
+    "slug": "formwork",
+    "description": "Formworkers create the temporary structures or molds used to hold concrete in place as it sets. This NVQ validates your skills in erecting and striking formwork, ensuring the final concrete structure meets design specifications.",
+    "benefits": [
+      "Certification of your specialized formwork skills",
+      "Eligibility for the Blue CSCS Card",
+      "Demonstrates understanding of concrete pressures and structural support",
+      "Essential for work on high-rise and civil engineering projects"
+    ],
+    "info": "Assessors will observe your ability to construct formwork from timber or proprietary systems, ensuring it is plumb, level, and secure.",
+    "levels": [
+      {
+        "id": "form-2",
+        "level": 2,
+        "course": "NVQ Level 2 Formwork",
+        "card": "Blue CSCS Card",
+        "tier": "Formworker",
+        "bookingType": "booking",
+        "price": 60
+      }
+    ]
+  },
+  {
+    "trade": "Demolition",
+    "slug": "demolition",
+    "description": "Demolition is a specialized and high-risk sector. This qualification proves you have the skills and safety knowledge to dismantle structures systematically and handle hazardous materials appropriately.",
+    "benefits": [
+      "Essential for operating legally on demolition sites",
+      "Eligibility for the CCDO (Certificate of Competence for Demolition Operatives) / Blue CSCS Card",
+      "Proves your understanding of structural collapse mechanisms",
+      "Validates your ability to work safely in hazardous environments"
+    ],
+    "info": "This NVQ involves demonstrating your ability to use hand tools and equipment to safely deconstruct elements of a building while managing waste and environmental impacts.",
+    "levels": [
+      {
+        "id": "demo-2",
+        "level": 2,
+        "course": "NVQ Level 2 Demolition",
+        "card": "Blue CSCS Card",
+        "tier": "Demolition Operative",
+        "bookingType": "booking",
+        "price": 60
+      }
+    ]
+  },
+  {
+    "trade": "Plant Operations",
+    "slug": "plant-operations",
+    "description": "Plant Operators handle heavy machinery such as excavators, dumpers, and cranes. This qualification is crucial for demonstrating that you can operate specific machinery safely and efficiently on busy construction sites.",
+    "benefits": [
+      "Required to obtain the CPCS (Construction Plant Competence Scheme) Card",
+      "Proves your competence in operating heavy machinery safely",
+      "Increases your value as a specialist machine operator",
+      "Demonstrates knowledge of pre-use checks and maintenance"
+    ],
+    "info": "Due to the specialized nature of plant machinery, pricing and specific course details vary based on the exact equipment you are qualifying for. Contact us to discuss your specific needs.",
+    "levels": [
+      {
+        "id": "plant-2",
+        "level": 2,
+        "course": "Plant Operations",
+        "card": "CPCS Card",
+        "tier": "Operator",
+        "bookingType": "contact",
+        "price": 0
+      }
+    ]
+  },
+  {
+    "trade": "Occupational Work Supervision",
+    "slug": "occupational-work-supervision",
+    "description": "This Level 3 NVQ is for tradespeople stepping up into supervisory roles. It assesses your ability to plan work, supervise a team, ensure health and safety compliance, and maintain quality control on site.",
+    "benefits": [
+      "Gain the Gold CSCS Supervisory Card",
+      "Official recognition of your leadership and management skills",
+      "Enables you to take on more responsibility and earn a higher salary",
+      "A stepping stone towards site management"
+    ],
+    "info": "You must already hold a relevant Level 2 qualification or have extensive experience in your specific trade to undertake this supervisory NVQ.",
+    "levels": [
+      {
+        "id": "occ-sup-3",
+        "level": 3,
+        "course": "NVQ Level 3 Occupational Work Supervision",
+        "card": "Gold CSCS Card",
+        "tier": "Supervisor",
+        "bookingType": "contact",
+        "price": 0
+      }
+    ]
+  },
+  {
+    "trade": "Construction Site Supervision",
+    "slug": "construction-site-supervision",
+    "description": "Aimed at main contractor supervisors, this Level 4 NVQ covers the comprehensive management of a construction site. It includes planning, programming, risk management, and coordinating multiple trades.",
+    "benefits": [
+      "Eligibility for the Gold CSCS Supervisor Card",
+      "Proves your capability to manage complex construction projects",
+      "Demonstrates high-level knowledge of safety, environmental, and quality standards",
+      "Career progression towards senior management"
+    ],
+    "info": "This NVQ requires evidence of your ability to manage dimensional control, allocate work, and supervise the overall construction process across various disciplines.",
+    "levels": [
+      {
+        "id": "const-sup-4",
+        "level": 4,
+        "course": "NVQ Level 4 Construction Site Supervision",
+        "card": "Gold CSCS Card",
+        "tier": "Senior Supervisor",
+        "bookingType": "contact",
+        "price": 0
+      }
+    ]
+  },
+  {
+    "trade": "Construction Site Management",
+    "slug": "construction-site-management",
+    "description": "This Level 6 NVQ is equivalent to a bachelor's degree and is designed for established site managers. It rigorously assesses your ability to manage projects, control costs, and ensure strict compliance with all regulations.",
+    "benefits": [
+      "Achieve the highly respected Black CSCS Manager Card",
+      "Degree-level recognition of your management expertise",
+      "Allows you to manage principal contractor sites",
+      "Opens doors to senior executive roles within the industry"
+    ],
+    "info": "Assessors will expect comprehensive evidence of your project management skills, including managing budgets, schedules, client relations, and complex health and safety systems.",
+    "levels": [
+      {
+        "id": "const-man-6",
+        "level": 6,
+        "course": "NVQ Level 6 Construction Site Management",
+        "card": "Black CSCS Card",
+        "tier": "Site Manager",
+        "bookingType": "contact",
+        "price": 0
+      }
+    ]
+  },
+  {
+    "trade": "Senior Construction Management",
+    "slug": "senior-construction-management",
+    "description": "The Level 7 NVQ is for senior leaders, directors, and contracts managers overseeing multiple projects or entire divisions. It is equivalent to a master's degree and validates strategic leadership within the construction sector.",
+    "benefits": [
+      "Master's degree level recognition of your strategic leadership",
+      "Eligibility for the Black CSCS Manager Card",
+      "Pathway to membership in professional bodies (e.g., MCIOB)",
+      "Proves your ability to lead organizations and direct major commercial operations"
+    ],
+    "info": "This elite qualification requires candidates to demonstrate their impact on organizational strategy, procurement, high-level project control, and corporate health and safety policies.",
+    "levels": [
+      {
+        "id": "sen-const-man-7",
+        "level": 7,
+        "course": "NVQ Level 7 Senior Construction Management",
+        "card": "Black CSCS Card",
+        "tier": "Senior Manager",
+        "bookingType": "contact",
+        "price": 0
+      }
+    ]
+  }
+]
