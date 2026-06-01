@@ -1,8 +1,9 @@
 "use client";
 
 import React from 'react';
-import { ShieldCheck, Phone, Mail, MapPin, Zap } from 'lucide-react';
+import { Phone, Mail, MapPin } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 
 function Footer({ dark = false }) {
@@ -21,13 +22,15 @@ function Footer({ dark = false }) {
 
           {/* Logo & Socials */}
           <div className="lg:col-span-2 flex flex-col items-start">
-            <Link href="/" className="flex items-center gap-3 mb-6">
-              <div className={`p-2 rounded-lg ${dark ? "bg-lime-400/10" : "bg-primary/10"}`}>
-                <ShieldCheck className={`w-8 h-8 ${dark ? "text-lime-400" : "text-primary"}`} />
-              </div>
-              <div className="flex flex-col">
-                <span className={`text-xl font-bold leading-none ${headingColor}`}>UK Qualify</span>
-                <span className={`text-[10px] font-medium mt-1 ${mutedText}`}>Courses | NVQ | CSCS</span>
+            <Link href="/" className="mb-6 flex items-center">
+              <div className="relative h-[54px] w-[180px]">
+                <Image
+                  src="/backlogo.png"
+                  alt="Logo"
+                  fill
+                  sizes="180px"
+                  className="object-contain"
+                />
               </div>
             </Link>
 
@@ -103,7 +106,7 @@ function Footer({ dark = false }) {
             </div>
           </div>
           <p className={`text-xs font-medium ${mutedText}`}>
-            © 2024 UK Qualify. All Rights Reserved.
+            &copy; 2024. All Rights Reserved.
           </p>
         </div>
       </div>

@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Select from "react-select";
 import {
     ShieldCheck,
@@ -251,6 +251,7 @@ function TiltCard({ children, className }) {
 
 function HeroSection() {
     const router = useRouter();
+    const shouldReduceMotion = useReducedMotion();
     const [selectedTrade, setSelectedTrade] = useState("");
     const [selectedLevel, setSelectedLevel] = useState("");
     const [mouseCoords, setMouseCoords] = useState({ x: 0, y: 0 });
@@ -341,6 +342,36 @@ function HeroSection() {
         value: trade.slug,
         label: trade.trade,
     }));
+
+    const heroHeadingWords = ["Learn.", "Qualify."];
+    const heroHighlightWords = ["Build", "Your", "Future."];
+
+    const headingVariants = {
+        hidden: {},
+        show: {
+            transition: {
+                delayChildren: shouldReduceMotion ? 0 : 0.25,
+                staggerChildren: shouldReduceMotion ? 0 : 0.55,
+            },
+        },
+    };
+
+    const headingWordVariants = {
+        hidden: {
+            opacity: shouldReduceMotion ? 1 : 0,
+            y: shouldReduceMotion ? 0 : 34,
+            filter: shouldReduceMotion ? "blur(0px)" : "blur(10px)",
+        },
+        show: {
+            opacity: 1,
+            y: 0,
+            filter: "blur(0px)",
+            transition: {
+                duration: shouldReduceMotion ? 0 : 1.55,
+                ease: [0.16, 1, 0.3, 1],
+            },
+        },
+    };
 
     // Trade Nodes on the Left and Right margins of the Hero
     const tradeNodes = [
@@ -518,16 +549,52 @@ function HeroSection() {
                 {/* Kinetic Staggered Typography */}
                 <div className="overflow-hidden">
                     <motion.h1
-                        initial={{ opacity: 0, y: 40 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                        variants={headingVariants}
+                        initial="hidden"
+                        animate="show"
                         className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] text-white"
                     >
-                        Learn. Qualify.
+                        {heroHeadingWords.map((word) => (
+                            <motion.span
+                                key={word}
+                                variants={headingWordVariants}
+                                className="inline-block pr-3 sm:pr-4"
+                            >
+                                {word}
+                            </motion.span>
+                        ))}
                         <br />
-                        <span className="bg-gradient-to-r from-lime-400 via-lime-400 to-lime-400 bg-clip-text text-transparent drop-shadow-[0_2px_15px_rgba(163,230,53,0.15)]">
-                            Build Your Future.
-                        </span>
+                        {heroHighlightWords.map((word, index) => (
+                            <motion.span
+                                key={word}
+                                variants={headingWordVariants}
+                                className={`inline-block ${index < heroHighlightWords.length - 1 ? "pr-3 sm:pr-4" : ""}`}
+                            >
+                                <motion.span
+                                    className="inline-block bg-[linear-gradient(110deg,#a3e635_0%,#d9f99d_35%,#bef264_55%,#a3e635_100%)] bg-[length:220%_100%] bg-clip-text text-transparent drop-shadow-[0_2px_15px_rgba(163,230,53,0.18)]"
+                                    animate={
+                                        shouldReduceMotion
+                                            ? undefined
+                                            : {
+                                                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                                            }
+                                    }
+                                    transition={
+                                        shouldReduceMotion
+                                            ? undefined
+                                            : {
+                                                backgroundPosition: {
+                                                    duration: 8,
+                                                    repeat: Infinity,
+                                                    ease: "easeInOut",
+                                                },
+                                            }
+                                    }
+                                >
+                                    {word}
+                                </motion.span>
+                            </motion.span>
+                        ))}
                     </motion.h1>
                 </div>
 
@@ -535,7 +602,7 @@ function HeroSection() {
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
+                    transition={{ duration: 0.7, delay: shouldReduceMotion ? 0 : 3.35, ease: "easeOut" }}
                     className="mt-6 max-w-2xl mx-auto text-base sm:text-lg lg:text-xl text-white/60 font-medium leading-relaxed"
                 >
                     CITB courses, NVQs, and CSCS cards - everything you need to work on
@@ -548,7 +615,7 @@ function HeroSection() {
                     onMouseEnter={() => setIsHeroPointerActive(false)}
                     initial={{ opacity: 0, y: 30, scale: 0.98 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
-                    transition={{ duration: 0.7, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{ duration: 0.7, delay: shouldReduceMotion ? 0 : 3.65, ease: [0.16, 1, 0.3, 1] }}
                     className={`relative mt-10 w-full max-w-3xl mx-auto bg-black/60 backdrop-blur-2xl rounded-2xl border shadow-[0_25px_60px_rgba(0,0,0,0.65)] p-3 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 z-30 transition-all duration-300 hover:border-lime-400/35 hover:shadow-[0_25px_70px_rgba(163,230,53,0.12)] ${selectedLevel || selectedTrade ? "border-lime-400/35" : "border-white/15"}`}
                 >
                     {/* LEVEL SELECT */}
@@ -606,7 +673,7 @@ function HeroSection() {
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.65, ease: "easeOut" }}
+                    transition={{ duration: 0.6, delay: shouldReduceMotion ? 0 : 3.95, ease: "easeOut" }}
                     className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 w-full relative"
                 >
                     {features.map((feature, idx) => (
