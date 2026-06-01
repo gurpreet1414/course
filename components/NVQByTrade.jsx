@@ -84,7 +84,7 @@ export default function NVQByTrade() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="mt-4 text-base text-white/70 sm:text-lg"
+            className="mt-4 text-base text-white sm:text-lg"
           >
             One platform, multiple construction qualifications. Start with your
             trade and connect directly to the right NVQ route.
@@ -136,7 +136,7 @@ export default function NVQByTrade() {
                   </Link>
                 </motion.div>
 
-                <span className="hidden text-center text-xs font-semibold text-white/70 group-hover:text-lime-400 sm:block">
+                <span className="hidden text-center text-xs font-semibold text-white group-hover:text-lime-400 sm:block">
                   {trade.title}
                 </span>
               </motion.div>

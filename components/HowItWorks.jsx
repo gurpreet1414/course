@@ -199,7 +199,7 @@ function HowItWorks() {
             animate={isInView ? "visible" : "hidden"}
             variants={fadeUp}
             transition={{ delay: 0.32 }}
-            className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-white/55 sm:text-base"
+            className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-white sm:text-base"
           >
             A smooth visual process from choosing your trade to getting
             qualified. Click any step to preview the journey.
@@ -250,7 +250,7 @@ function HowItWorks() {
                     </h3>
                   </div>
 
-                  <div className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-bold text-white/45">
+                  <div className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-bold text-white">
                     {active + 1} / {steps.length}
                   </div>
                 </motion.div>
@@ -336,7 +336,7 @@ function HowItWorks() {
                               NVQ Journey
                             </h4>
 
-                            <p className="mt-2 text-sm text-white/45">
+                            <p className="mt-2 text-sm text-white">
                               Complete your qualification step by step
                             </p>
                           </div>
@@ -406,7 +406,7 @@ function HowItWorks() {
                                         ? "bg-lime-300 text-black"
                                         : isDone
                                         ? "bg-emerald-300/15 text-emerald-200"
-                                        : "bg-white/[0.06] text-white/35"
+                                        : "bg-white/[0.06] text-white"
                                     }`}
                                   >
                                     {index < active ? (
@@ -446,7 +446,7 @@ function HowItWorks() {
                           }}
                           className="mt-auto"
                         >
-                          <div className="mb-2 flex justify-between text-xs font-black uppercase tracking-[0.18em] text-white/35">
+                          <div className="mb-2 flex justify-between text-xs font-black uppercase tracking-[0.18em] text-white">
                             <span>Completion</span>
                             <span>
                               {Math.round(((active + 1) / steps.length) * 100)}%
@@ -516,7 +516,7 @@ function HowItWorks() {
                             ? "bg-lime-300 text-black"
                             : isDone
                             ? "bg-emerald-300/15 text-emerald-200"
-                            : "bg-white/[0.06] text-white/50 group-hover:text-lime-300"
+                            : "bg-white/[0.06] text-white group-hover:text-lime-300"
                         }`}
                       >
                         {isDone ? (
@@ -530,7 +530,7 @@ function HowItWorks() {
                         <div className="mb-2 flex items-center justify-between">
                           <p
                             className={`text-xs font-black uppercase tracking-[0.22em] ${
-                              isActive ? "text-lime-300" : "text-white/35"
+                              isActive ? "text-lime-300" : "text-white"
                             }`}
                           >
                             Step {step.num}
@@ -540,7 +540,7 @@ function HowItWorks() {
                             className={`h-4 w-4 transition ${
                               isActive
                                 ? "text-lime-300"
-                                : "text-white/30 group-hover:text-lime-300"
+                                : "text-white group-hover:text-lime-300"
                             }`}
                           />
                         </div>
@@ -549,7 +549,7 @@ function HowItWorks() {
                           {step.title}
                         </h3>
 
-                        <p className="mt-2 text-sm leading-6 text-white/50">
+                        <p className="mt-2 text-sm leading-6 text-white">
                           {step.desc}
                         </p>
 
@@ -566,7 +566,7 @@ function HowItWorks() {
                                 {step.points.map((point) => (
                                   <div
                                     key={point}
-                                    className="flex items-center gap-2 text-sm font-semibold text-white/70"
+                                    className="flex items-center gap-2 text-sm font-semibold text-white"
                                   >
                                     <span className="flex h-5 w-5 items-center justify-center rounded-full bg-lime-300/10 text-lime-300">
                                       <CheckCircle2 className="h-3.5 w-3.5" />
@@ -632,7 +632,7 @@ function HowItWorks() {
                     className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border transition ${
                       isActive
                         ? "border-lime-300/35 bg-lime-300 text-black"
-                        : "border-white/10 bg-[#070907] text-white/60"
+                        : "border-white/10 bg-[#070907] text-white"
                     }`}
                   >
                     <Icon className="h-6 w-6" />
@@ -645,7 +645,7 @@ function HowItWorks() {
                     <h3 className="mt-1 text-base font-black text-white">
                       {step.title}
                     </h3>
-                    <p className="mt-1 text-sm leading-6 text-white/45">
+                    <p className="mt-1 text-sm leading-6 text-white">
                       {step.desc}
                     </p>
                   </div>
@@ -661,7 +661,7 @@ function HowItWorks() {
                       className="overflow-hidden"
                     >
                       <div className="border-t border-white/10 px-4 pb-5 pt-4">
-                        <p className="text-sm leading-7 text-white/58">
+                        <p className="text-sm leading-7 text-white">
                           {step.longDesc}
                         </p>
 
@@ -669,7 +669,7 @@ function HowItWorks() {
                           {step.points.map((point) => (
                             <div
                               key={point}
-                              className="flex items-center gap-2 text-sm font-semibold text-white/70"
+                              className="flex items-center gap-2 text-sm font-semibold text-white"
                             >
                               <span className="flex h-5 w-5 items-center justify-center rounded-full bg-lime-300/10 text-lime-300">
                                 <CheckCircle2 className="h-3.5 w-3.5" />

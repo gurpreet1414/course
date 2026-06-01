@@ -10,9 +10,9 @@ function Footer({ dark = false }) {
   const bg = dark ? "bg-[#020202]" : "bg-[#fafafa]";
   const borderTop = dark ? "border-t border-white/5" : "border-t border-gray-100";
   const headingColor = dark ? "text-white" : "text-foreground";
-  const linkColor = dark ? "text-white/40 hover:text-lime-400" : "text-muted hover:text-primary";
-  const mutedText = dark ? "text-white/30" : "text-muted";
-  const socialBorder = dark ? "border-white/10 text-white/40 hover:text-lime-400 hover:border-lime-400/40" : "border-gray-200 text-muted hover:text-primary hover:border-primary";
+  const linkColor = dark ? "text-white hover:text-lime-400" : "text-muted hover:text-primary";
+  const mutedText = dark ? "text-white" : "text-muted";
+  const socialBorder = dark ? "border-white/10 text-white hover:text-lime-400 hover:border-lime-400/40" : "border-gray-200 text-muted hover:text-primary hover:border-primary";
   const bottomBorder = dark ? "border-t border-white/5" : "border-t border-gray-200";
 
   return (

@@ -62,7 +62,7 @@ function StatsCTA() {
                   {stat.value}
                 </motion.span>
 
-                <span className="text-sm font-semibold text-white/55 tracking-wide">
+                <span className="text-sm font-semibold text-white tracking-wide">
                   {stat.label}
                 </span>
 

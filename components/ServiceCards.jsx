@@ -59,12 +59,12 @@ function ServiceCards() {
               </div>
               <div className="flex flex-col mt-1">
                 <h3 className="text-lg font-bold text-white mb-1 group-hover:text-lime-400 transition-colors">{service.title}</h3>
-                <p className="text-sm text-white/50 font-medium line-clamp-2">{service.description}</p>
+                <p className="text-sm text-white font-medium line-clamp-2">{service.description}</p>
               </div>
             </div>
             
             <div className="flex justify-end mt-4">
-              <ArrowRight className="w-5 h-5 text-white/20 group-hover:text-lime-400 group-hover:translate-x-1 transition-all" />
+              <ArrowRight className="w-5 h-5 text-white group-hover:text-lime-400 group-hover:translate-x-1 transition-all" />
             </div>
           </motion.div>
         ))}

@@ -321,11 +321,11 @@ export default function Navbar({ dark = false }) {
                   href={item.href}
                   className="flex items-center gap-1 group whitespace-nowrap"
                 >
-                  <span className="text-sm xl:text-base font-semibold text-white/90 group-hover:text-lime-400 transition-colors">
+                  <span className="text-sm xl:text-base font-semibold text-white group-hover:text-lime-400 transition-colors">
                     {item.title}
                   </span>
                   {item.dropdown && (
-                    <ChevronDown className="w-3.5 h-3.5 text-white/40 group-hover:text-lime-400 transition-colors group-hover:rotate-180 duration-300" />
+                    <ChevronDown className="w-3.5 h-3.5 text-white group-hover:text-lime-400 transition-colors group-hover:rotate-180 duration-300" />
                   )}
                 </Link>
               </div>
@@ -339,7 +339,7 @@ export default function Navbar({ dark = false }) {
               onClick={openSearch}
               whileHover={{ y: -2, scale: 1.04 }}
               whileTap={{ scale: 0.94 }}
-              className="group relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-white/[0.04] text-white/90 transition-all duration-300 hover:border-lime-400/45 hover:bg-lime-400/10 hover:text-lime-400 hover:shadow-[0_0_24px_rgba(163,230,53,0.18)]"
+              className="group relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-white/[0.04] text-white transition-all duration-300 hover:border-lime-400/45 hover:bg-lime-400/10 hover:text-lime-400 hover:shadow-[0_0_24px_rgba(163,230,53,0.18)]"
               aria-label="Open course search"
             >
               <span className="absolute inset-0 rounded-xl bg-lime-400/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
@@ -349,7 +349,7 @@ export default function Navbar({ dark = false }) {
             {/* Login Button with Premium Glow */}
             <Link
               href="/login"
-              className="flex items-center gap-2 text-sm xl:text-base font-bold text-white/90 hover:text-lime-400 transition-all border border-white/10 hover:border-lime-400/40 rounded-xl px-4 py-2 bg-white/[0.03] hover:bg-lime-400/5 hover:shadow-[0_0_15px_rgba(163,230,53,0.15)] duration-300"
+              className="flex items-center gap-2 text-sm xl:text-base font-bold text-white hover:text-lime-400 transition-all border border-white/10 hover:border-lime-400/40 rounded-xl px-4 py-2 bg-white/[0.03] hover:bg-lime-400/5 hover:shadow-[0_0_15px_rgba(163,230,53,0.15)] duration-300"
             >
               <User className="w-4 h-4 text-lime-400" />
               Login
@@ -363,10 +363,10 @@ export default function Navbar({ dark = false }) {
               </div>
               <Phone className="w-4 h-4 text-lime-400" />
               <div className="leading-tight">
-                <p className="text-sm font-bold text-white/90 hover:text-lime-400 transition-colors duration-200">
+                <p className="text-sm font-bold text-white hover:text-lime-400 transition-colors duration-200">
                   <a href="tel:02039038106">02039038106</a>
                 </p>
-                <p className="text-[10px] text-white/40 font-medium">Mon - Fri 8am - 6pm</p>
+                <p className="text-[10px] text-white font-medium">Mon - Fri 8am - 6pm</p>
               </div>
             </div>
           </div>
@@ -377,7 +377,7 @@ export default function Navbar({ dark = false }) {
               type="button"
               onClick={openSearch}
               whileTap={{ scale: 0.94 }}
-              className="p-2 text-white/90 hover:text-lime-400 transition-colors rounded-xl border border-white/10 bg-white/[0.04]"
+              className="p-2 text-white hover:text-lime-400 transition-colors rounded-xl border border-white/10 bg-white/[0.04]"
               aria-label="Open course search"
             >
               <Search className="w-5 h-5" />
@@ -385,7 +385,7 @@ export default function Navbar({ dark = false }) {
 
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 text-white/90 hover:text-lime-400 transition-colors rounded-xl border border-white/10 bg-white/[0.04]"
+              className="p-2 text-white hover:text-lime-400 transition-colors rounded-xl border border-white/10 bg-white/[0.04]"
               aria-label="Toggle mobile menu"
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -423,10 +423,10 @@ export default function Navbar({ dark = false }) {
                             <cat.icon className="w-4 h-4 text-white group-hover:text-lime-400 transition-colors" />
                           </div>
                           <div>
-                            <p className="text-sm font-bold text-white/95 group-hover:text-lime-400 transition-colors leading-none mb-1">
+                            <p className="text-sm font-bold text-white group-hover:text-lime-400 transition-colors leading-none mb-1">
                               {cat.title}
                             </p>
-                            <p className="text-xs text-white/50 group-hover:text-white/70 transition-colors">
+                            <p className="text-xs text-white group-hover:text-white transition-colors">
                               {cat.desc}
                             </p>
                           </div>
@@ -444,7 +444,7 @@ export default function Navbar({ dark = false }) {
                       <h4 className="text-base font-bold text-white leading-tight">
                         Need Immediate Assistance?
                       </h4>
-                      <p className="text-xs text-white/60 leading-relaxed">
+                      <p className="text-xs text-white leading-relaxed">
                         Talk directly to our NVQ advisors. We will help you select the exact trade code and tier for your site requirements.
                       </p>
                     </div>
@@ -479,10 +479,10 @@ export default function Navbar({ dark = false }) {
                             <lvl.icon className="w-4 h-4 text-white group-hover:text-lime-400 transition-colors" />
                           </div>
                           <div>
-                            <p className="text-sm font-bold text-white/95 group-hover:text-lime-400 transition-colors leading-none mb-1">
+                            <p className="text-sm font-bold text-white group-hover:text-lime-400 transition-colors leading-none mb-1">
                               {lvl.title}
                             </p>
-                            <p className="text-xs text-white/50 group-hover:text-white/70 transition-colors">
+                            <p className="text-xs text-white group-hover:text-white transition-colors">
                               {lvl.desc}
                             </p>
                           </div>
@@ -494,12 +494,12 @@ export default function Navbar({ dark = false }) {
                   <div className="col-span-4 border-l border-white/10 pl-6 flex flex-col justify-between">
                     <div className="space-y-3">
                       <h4 className="text-base font-bold text-white">Not sure what level you need?</h4>
-                      <p className="text-xs text-white/60 leading-relaxed">
+                      <p className="text-xs text-white leading-relaxed">
                         Qualifications range from Level 1 to 7. Your level corresponds to your job role on-site (Labourer, Skilled Craft, Supervisor, or Manager).
                       </p>
                       <div className="p-3 bg-white/[0.02] border border-white/5 rounded-xl flex items-center gap-3">
                         <ShieldCheck className="w-5 h-5 text-lime-400 shrink-0" />
-                        <span className="text-[11px] text-white/70">100% Verified CITB On-Site Assessments.</span>
+                        <span className="text-[11px] text-white">100% Verified CITB On-Site Assessments.</span>
                       </div>
                     </div>
                     <Link
@@ -532,10 +532,10 @@ export default function Navbar({ dark = false }) {
                           <div className="p-2 rounded-lg bg-white/[0.04] border border-white/10 group-hover:border-lime-400/40 group-hover:bg-lime-400/10 text-white transition-all mb-3">
                             <res.icon className="w-4 h-4 text-white group-hover:text-lime-400 transition-colors" />
                           </div>
-                          <p className="text-sm font-bold text-white/95 group-hover:text-lime-400 transition-colors leading-tight mb-1">
+                          <p className="text-sm font-bold text-white group-hover:text-lime-400 transition-colors leading-tight mb-1">
                             {res.title}
                           </p>
-                          <p className="text-xs text-white/50 group-hover:text-white/70 transition-colors leading-normal mt-1">
+                          <p className="text-xs text-white  group-hover:text-white transition-colors leading-normal mt-1">
                             {res.desc}
                           </p>
                         </Link>
@@ -579,14 +579,14 @@ export default function Navbar({ dark = false }) {
               <div className="relative border-b border-white/10 p-4 sm:p-5">
                 <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                   <div>
-                    <p className="text-xs font-black uppercase text-lime-300">
+                    <p className="text-sm font-black uppercase text-lime-300">
                       Global Course Finder
                     </p>
-                    <p className="mt-1 text-sm font-medium text-white/55">
+                    <p className="mt-1 text-base font-medium text-white">
                       Search NVQs, CSCS cards, levels and trades instantly.
                     </p>
                   </div>
-                  <div className="hidden rounded-full border border-lime-400/20 bg-lime-400/10 px-3 py-1.5 text-xs font-bold text-lime-300 sm:block">
+                  <div className="hidden rounded-full border border-lime-400/20 bg-lime-400/10 px-3 py-1.5 text-sm font-bold text-lime-300 sm:block">
                     {courseResults.length} pathways indexed
                   </div>
                 </div>
@@ -608,9 +608,9 @@ export default function Navbar({ dark = false }) {
                       value={searchQuery}
                       onChange={(event) => setSearchQuery(event.target.value)}
                       placeholder="Search NVQ, trade, CSCS card, level..."
-                      className="h-14 w-full rounded-xl border border-white/10 bg-white/[0.055] px-4 pr-12 text-base font-bold text-white outline-none transition-all placeholder:text-white/45 focus:border-lime-400/55 focus:bg-white/[0.075] focus:shadow-[0_0_0_4px_rgba(163,230,53,0.12)]"
+                      className="h-14 w-full rounded-xl border border-white/10 bg-white/[0.055] px-4 pr-12 text-lg font-bold text-white outline-none transition-all placeholder:text-white focus:border-lime-400/55 focus:bg-white/[0.075] focus:shadow-[0_0_0_4px_rgba(163,230,53,0.12)]"
                     />
-                    <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 rounded-md border border-white/10 bg-black/35 px-2 py-1 text-[10px] font-bold uppercase text-white/35">
+                    <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 rounded-md border border-white/10 bg-black/35 px-2 py-1 text-xs font-bold uppercase text-white">
                       Esc
                     </span>
                   </div>
@@ -620,7 +620,7 @@ export default function Navbar({ dark = false }) {
                     onClick={closeSearch}
                     whileHover={{ rotate: 90, scale: 1.05 }}
                     whileTap={{ scale: 0.92 }}
-                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] text-white/80 transition hover:border-lime-300/45 hover:bg-lime-300/10 hover:text-lime-200 hover:shadow-[0_0_26px_rgba(163,230,53,0.18)]"
+                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] text-white transition hover:border-lime-300/45 hover:bg-lime-300/10 hover:text-lime-200 hover:shadow-[0_0_26px_rgba(163,230,53,0.18)]"
                     aria-label="Close search"
                   >
                     <X className="h-5 w-5" />
@@ -628,7 +628,7 @@ export default function Navbar({ dark = false }) {
                 </div>
 
                 <div className="mt-4 flex flex-wrap items-center gap-2">
-                  <div className="mr-1 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.035] px-3 py-2 text-xs font-bold text-white/60">
+                  <div className="mr-1 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.035] px-3 py-2 text-sm font-bold text-white">
                     <SlidersHorizontal className="h-3.5 w-3.5 text-lime-300" />
                     Filters {activeFilterCount > 0 && `(${activeFilterCount})`}
                   </div>
@@ -638,9 +638,9 @@ export default function Navbar({ dark = false }) {
                     onClick={() => setSelectedSearchLevel("all")}
                     whileHover={{ y: -2 }}
                     whileTap={{ scale: 0.95 }}
-                    className={`rounded-full border px-3 py-2 text-xs font-bold transition ${selectedSearchLevel === "all"
+                    className={`rounded-full border px-3 py-2 text-sm font-bold transition ${selectedSearchLevel === "all"
                       ? "border-lime-400 bg-lime-400 text-black shadow-[0_0_20px_rgba(163,230,53,0.22)]"
-                      : "border-white/10 bg-white/[0.03] text-white/65 hover:border-lime-400/35 hover:bg-lime-400/10 hover:text-lime-200"
+                      : "border-white/10 bg-white/[0.03] text-white hover:border-lime-400/35 hover:bg-lime-400/10 hover:text-lime-200"
                       }`}
                   >
                     All Levels
@@ -652,9 +652,9 @@ export default function Navbar({ dark = false }) {
                       onClick={() => setSelectedSearchLevel(level)}
                       whileHover={{ y: -2 }}
                       whileTap={{ scale: 0.95 }}
-                      className={`rounded-full border px-3 py-2 text-xs font-bold transition ${selectedSearchLevel === level
+                      className={`rounded-full border px-3 py-2 text-sm font-bold transition ${selectedSearchLevel === level
                         ? "border-lime-400 bg-lime-400 text-black shadow-[0_0_20px_rgba(163,230,53,0.22)]"
-                        : "border-white/10 bg-white/[0.03] text-white/65 hover:border-lime-400/35 hover:bg-lime-400/10 hover:text-lime-200"
+                        : "border-white/10 bg-white/[0.03] text-white hover:border-lime-400/35 hover:bg-lime-400/10 hover:text-lime-200"
                         }`}
                     >
                       Level {level}
@@ -668,9 +668,9 @@ export default function Navbar({ dark = false }) {
                     onClick={() => setSelectedSearchTrade("all")}
                     whileHover={{ y: -2 }}
                     whileTap={{ scale: 0.95 }}
-                    className={`shrink-0 rounded-full border px-3 py-2 text-xs font-bold transition ${selectedSearchTrade === "all"
+                    className={`shrink-0 rounded-full border px-3 py-2 text-sm font-bold transition ${selectedSearchTrade === "all"
                       ? "border-lime-400 bg-lime-400 text-black shadow-[0_0_20px_rgba(163,230,53,0.22)]"
-                      : "border-white/10 bg-white/[0.03] text-white/60 hover:border-lime-400/35 hover:bg-lime-400/10 hover:text-lime-200"
+                      : "border-white/10 bg-white/[0.03] text-white hover:border-lime-400/35 hover:bg-lime-400/10 hover:text-lime-200"
                       }`}
                   >
                     All Trades
@@ -682,9 +682,9 @@ export default function Navbar({ dark = false }) {
                       onClick={() => setSelectedSearchTrade(trade.value)}
                       whileHover={{ y: -2 }}
                       whileTap={{ scale: 0.95 }}
-                      className={`shrink-0 rounded-full border px-3 py-2 text-xs font-bold transition ${selectedSearchTrade === trade.value
+                      className={`shrink-0 rounded-full border px-3 py-2 text-sm font-bold transition ${selectedSearchTrade === trade.value
                         ? "border-lime-400 bg-lime-400 text-black shadow-[0_0_20px_rgba(163,230,53,0.22)]"
-                        : "border-white/10 bg-white/[0.03] text-white/60 hover:border-lime-400/35 hover:bg-lime-400/10 hover:text-lime-200"
+                        : "border-white/10 bg-white/[0.03] text-white hover:border-lime-400/35 hover:bg-lime-400/10 hover:text-lime-200"
                         }`}
                     >
                       {trade.label}
@@ -695,13 +695,13 @@ export default function Navbar({ dark = false }) {
 
               <div className="relative max-h-[58vh] overflow-y-auto p-4 sm:p-5">
                 <div className="mb-3 flex items-center justify-between gap-3">
-                  <p className="text-xs font-black uppercase text-lime-200">
+                  <p className="text-sm font-black uppercase text-lime-200">
                     {filteredSearchResults.length} Match{filteredSearchResults.length === 1 ? "" : "es"}
                   </p>
                   <Link
                     href="/courses"
                     onClick={closeSearch}
-                    className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.035] px-3 py-2 text-xs font-bold text-white/60 transition hover:border-lime-300/35 hover:bg-lime-300/10 hover:text-lime-200"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.035] px-3 py-2 text-sm font-bold text-white transition hover:border-lime-300/35 hover:bg-lime-300/10 hover:text-lime-200"
                   >
                     Browse all courses
                     <ArrowUpRight className="h-3.5 w-3.5" />
@@ -728,36 +728,36 @@ export default function Navbar({ dark = false }) {
 
                           <div className="flex items-start justify-between gap-3">
                             <div className="min-w-0">
-                              <p className="text-[11px] font-black uppercase text-lime-200">
+                              <p className="text-xs font-black uppercase text-lime-200">
                                 {result.trade}
                               </p>
-                              <h3 className="mt-2 text-base font-black leading-tight text-white transition-colors group-hover:text-lime-50">
+                              <h3 className="mt-2 text-lg font-black leading-tight text-white transition-colors group-hover:text-lime-50">
                                 {result.course}
                               </h3>
                             </div>
-                            <div className="shrink-0 rounded-full border border-lime-400/35 bg-lime-400/10 px-3 py-1 text-xs font-black text-lime-200 shadow-[0_0_16px_rgba(163,230,53,0.12)]">
+                            <div className="shrink-0 rounded-full border border-lime-400/35 bg-lime-400/10 px-3 py-1 text-sm font-black text-lime-200 shadow-[0_0_16px_rgba(163,230,53,0.12)]">
                               L{result.level}
                             </div>
                           </div>
 
                           <div className="mt-4 flex flex-wrap gap-2">
-                            <span className="rounded-full border border-white/10 bg-black/30 px-2.5 py-1 text-[11px] font-semibold text-white/70">
+                            <span className="rounded-full border border-white/10 bg-black/30 px-2.5 py-1 text-xs font-semibold text-white">
                               {result.card}
                             </span>
-                            <span className="rounded-full border border-white/10 bg-black/25 px-2.5 py-1 text-[11px] font-semibold text-white/60">
+                            <span className="rounded-full border border-white/10 bg-black/25 px-2.5 py-1 text-xs font-semibold text-white">
                               {result.tier}
                             </span>
-                            <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-black/25 px-2.5 py-1 text-[11px] font-semibold text-white/60">
+                            <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-black/25 px-2.5 py-1 text-xs font-semibold text-white">
                               <BadgePoundSterling className="h-3 w-3 text-lime-200" />
                               {result.price > 0 ? `From \u00a3${result.price}` : "Advisor quote"}
                             </span>
                           </div>
 
                           <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-3">
-                            <p className="line-clamp-1 text-xs text-white/55">
+                            <p className="line-clamp-1 text-sm text-white">
                               {result.description}
                             </p>
-                            <ArrowUpRight className="ml-3 h-4 w-4 shrink-0 text-white/40 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-lime-200" />
+                            <ArrowUpRight className="ml-3 h-4 w-4 shrink-0 text-white transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-lime-200" />
                           </div>
                         </Link>
                       </motion.div>
@@ -770,8 +770,8 @@ export default function Navbar({ dark = false }) {
                     transition={{ duration: 0.28, ease: "easeOut" }}
                     className="rounded-xl border border-white/10 bg-white/[0.025] px-5 py-10 text-center"
                   >
-                    <p className="text-lg font-black text-white">No courses found</p>
-                    <p className="mx-auto mt-2 max-w-md text-sm text-white/60">
+                    <p className="text-xl font-black text-white">No courses found</p>
+                    <p className="mx-auto mt-2 max-w-md text-base text-white">
                       Try another trade, level, card type, or qualification name.
                     </p>
                   </motion.div>
@@ -798,7 +798,7 @@ export default function Navbar({ dark = false }) {
                   <Link
                     href={item.href}
                     onClick={() => setIsOpen(false)}
-                    className="block text-base font-bold text-white/80 hover:text-lime-400 transition-colors py-2"
+                    className="block text-base font-bold text-white hover:text-lime-400 transition-colors py-2"
                   >
                     {item.title}
                   </Link>
@@ -819,8 +819,8 @@ export default function Navbar({ dark = false }) {
                   <div className="flex items-center gap-3">
                     <Phone className="w-5 h-5 text-lime-400" />
                     <div>
-                      <p className="text-base font-bold text-white/90">02039038106</p>
-                      <p className="text-xs text-white/40">Mon - Fri 8am - 6pm</p>
+                      <p className="text-base font-bold text-white">02039038106</p>
+                      <p className="text-xs text-white">Mon - Fri 8am - 6pm</p>
                     </div>
                   </div>
                   <div className="relative flex h-2.5 w-2.5">

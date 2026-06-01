@@ -156,7 +156,7 @@ function LogosSection() {
               delay: 0.3,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-white/55 sm:text-base"
+            className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-white sm:text-base"
           >
             A modern accreditation ecosystem with trusted partners, recognised
             pathways, and professional certification routes.
@@ -257,7 +257,7 @@ function LogosSection() {
             initial={{ opacity: 0, y: 16 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.65, delay: 1.8, ease: "easeOut" }}
-            className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-white/50 backdrop-blur-xl"
+            className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-white backdrop-blur-xl"
           >
             <Sparkles className="h-3.5 w-3.5 text-lime-300" />
             Click any logo to view details
@@ -424,7 +424,7 @@ function LogosSection() {
                           {partner.name}
                         </h3>
 
-                        <p className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-white/35">
+                        <p className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-white">
                           Tap to view details
                         </p>
                       </div>
@@ -439,7 +439,7 @@ function LogosSection() {
                           transition={{ duration: 0.35, ease: "easeOut" }}
                           className="overflow-hidden"
                         >
-                          <div className="ml-[72px] mt-3 rounded-3xl border border-white/10 bg-white/[0.04] p-4 text-sm leading-7 text-white/55 backdrop-blur-xl">
+                          <div className="ml-[72px] mt-3 rounded-3xl border border-white/10 bg-white/[0.04] p-4 text-sm leading-7 text-white backdrop-blur-xl">
                             {partner.text}
                           </div>
                         </motion.div>
@@ -476,7 +476,7 @@ function LogosSection() {
               <button
                 type="button"
                 onClick={() => setSelected(null)}
-                className="absolute right-5 top-5 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.05] text-white/60 transition hover:bg-white/[0.1] hover:text-white"
+                className="absolute right-5 top-5 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.05] text-white transition hover:bg-white/[0.1] hover:text-white"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -488,7 +488,7 @@ function LogosSection() {
                     Partner Details
                   </div>
 
-                  <div className="text-xs font-semibold text-white/40">
+                  <div className="text-xs font-semibold text-white">
                     0{selected + 1} / 0{partners.length}
                   </div>
                 </div>
@@ -512,7 +512,7 @@ function LogosSection() {
                   {selectedPartner.name}
                 </h3>
 
-                <p className="mt-4 text-sm leading-7 text-white/58">
+                <p className="mt-4 text-sm leading-7 text-white">
                   {selectedPartner.text}
                 </p>
 

@@ -262,7 +262,7 @@ function CareerSlide({ path, index, scrollYProgress }) {
               opacity: descriptionOpacity,
               y: descriptionY,
             }}
-            className="text-white/50 max-w-xl text-lg font-medium leading-8 sm:text-xl"
+            className="text-white max-w-xl text-lg font-medium leading-8 sm:text-xl"
           >
             {path.description}
           </motion.p>
@@ -317,7 +317,7 @@ function CareerSlide({ path, index, scrollYProgress }) {
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </button>
 
-            <span className="text-white/40 text-sm font-semibold">
+            <span className="text-white text-sm font-semibold">
               {path.cardName}
             </span>
           </motion.div>

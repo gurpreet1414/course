@@ -524,7 +524,7 @@ function HeroSection() {
                             </div>
                             <span
                                 className={`rounded-full border px-3 py-1 text-[11px] !font-extrabold uppercase !tracking-[0.08em] transition-all duration-300
-                  ${isSelected ? "border-lime-300 bg-lime-300 text-black shadow-[0_0_20px_rgba(163,230,53,0.4)]" : isActive ? "border-white/40 bg-white/[0.12] text-white shadow-[0_0_22px_rgba(255,255,255,0.18)]" : "border-white/10 bg-black/55 text-white/70"}`}
+                  ${isSelected ? "border-lime-300 bg-lime-300 text-black shadow-[0_0_20px_rgba(163,230,53,0.4)]" : isActive ? "border-white/40 bg-white/[0.12] text-white shadow-[0_0_22px_rgba(255,255,255,0.18)]" : "border-white/10 bg-black/55 text-white"}`}
                             >
                                 {node.title}
                             </span>
@@ -603,7 +603,7 @@ function HeroSection() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: shouldReduceMotion ? 0 : 3.35, ease: "easeOut" }}
-                    className="mt-6 max-w-2xl mx-auto text-base sm:text-lg lg:text-xl text-white/60 font-medium leading-relaxed"
+                    className="mt-6 max-w-2xl mx-auto text-base sm:text-lg lg:text-xl text-white font-medium leading-relaxed"
                 >
                     CITB courses, NVQs, and CSCS cards - everything you need to work on
                     site, get qualified, and grow your construction career faster.
@@ -684,7 +684,7 @@ function HeroSection() {
                             <div className="bg-lime-400/10 p-2 rounded-full">
                                 <feature.icon className="h-[18px] w-[18px] text-lime-400" />
                             </div>
-                            <span className="text-sm font-bold text-white/80 select-none">
+                            <span className="text-sm font-bold text-white select-none">
                                 {feature.text}
                             </span>
                         </TiltCard>

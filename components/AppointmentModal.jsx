@@ -84,7 +84,7 @@ export default function AppointmentModal({ open, onClose, course }) {
                     <h2 className="text-3xl sm:text-4xl font-extrabold leading-tight mb-4">
                       Choose a time to speak with our training team.
                     </h2>
-                    <p className="text-white/75 leading-7 mb-8">
+                    <p className="text-white leading-7 mb-8">
                       We will help you pick the right qualification, NVQ level, CSCS route and next steps.
                     </p>
                     <div className="space-y-4 text-sm">

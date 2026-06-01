@@ -652,7 +652,7 @@ function PopularCourses() {
 
               <motion.p
                 variants={headingItem}
-                className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-white/65 sm:text-base"
+                className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-white sm:text-base"
               >
                 Explore trusted construction and safety training with clear
                 duration, starting price, and flexible booking support.
@@ -839,13 +839,13 @@ const y = useTransform(diff, (distance) => {
             </div>
           </div>
 
-          <div className="hidden rounded-full border border-white/10 bg-black/35 px-4 py-2 text-xs font-black uppercase text-white/65 backdrop-blur sm:block">
+          <div className="hidden rounded-full border border-white/10 bg-black/35 px-4 py-2 text-xs font-black uppercase text-white backdrop-blur sm:block">
             {index + 1}/{total}
           </div>
         </div>
 
         <div className="max-w-3xl">
-          <p className="max-w-2xl text-xs leading-6 text-white/75 sm:text-base sm:leading-7 lg:text-lg">
+          <p className="max-w-2xl text-xs leading-6 text-white sm:text-base sm:leading-7 lg:text-lg">
             {course.description}
           </p>
 
@@ -881,7 +881,7 @@ const y = useTransform(diff, (distance) => {
               </Link>
             </motion.div>
 
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/30 px-4 py-3 text-[11px] font-semibold text-white/65 backdrop-blur sm:text-xs">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/30 px-4 py-3 text-[11px] font-semibold text-white backdrop-blur sm:text-xs">
               <CheckCircle2 className="h-4 w-4 shrink-0 text-[#caff5f]" />
               Flexible booking available
             </div>
@@ -902,7 +902,7 @@ function InfoPill({ icon: Icon, label, value, shouldReduceMotion }) {
         <Icon className="h-4 w-4 text-[#caff5f]" />
       </div>
 
-      <p className="text-[10px] font-bold uppercase text-white/45 sm:text-xs">
+      <p className="text-[10px] font-bold uppercase text-white sm:text-xs">
         {label}
       </p>
 

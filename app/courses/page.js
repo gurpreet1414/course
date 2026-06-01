@@ -163,7 +163,7 @@ function CoursesListing() {
                 <span className="block text-lime-300">CSCS and NVQ course</span>
               </h1>
 
-              <p className="mt-5 max-w-3xl text-sm leading-7 text-white/60 sm:text-base">
+              <p className="mt-5 max-w-3xl text-sm leading-7 text-white sm:text-base">
                 Explore construction training by trade, level, card type and course
                 pathway. Filter quickly, compare options and book guidance with our
                 advisors.
@@ -183,7 +183,7 @@ function CoursesListing() {
                   <div className="text-2xl font-black text-lime-300">
                     {stat.value}
                   </div>
-                  <div className="mt-1 text-[11px] font-bold text-white/45">
+                  <div className="mt-1 text-[11px] font-bold text-white">
                     {stat.label}
                   </div>
                 </div>
