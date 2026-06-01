@@ -12,22 +12,23 @@ import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen bg-white">
-      <Navbar />
-      
+    <div className="flex flex-col min-h-screen bg-[#020202] text-white">
+      <Navbar dark />
+
       <main className="flex-grow ">
         <div className='sm:mt-24 mt-18'></div>
-        <HeroSection  />
+        <HeroSection />
         <ServiceCards />
         <CareerPath />
-        <PopularCourses />
+       
         <NVQByTrade />
+         <PopularCourses />
         <HowItWorks />
         <LogosSection />
         <StatsCTA />
       </main>
 
-      <Footer />
+      <Footer dark />
     </div>
   );
 }

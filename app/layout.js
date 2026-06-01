@@ -1,11 +1,12 @@
-import { Poppins } from "next/font/google";
+import { Albert_Sans } from "next/font/google";
 import "./globals.css";
 import Providers from "../components/Providers";
 
-const poppins = Poppins({
-  variable: "--font-poppins",
+const albertSans = Albert_Sans({
+  variable: "--font-albert-sans",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  display: "swap",
 });
 
 export const metadata = {
@@ -17,9 +18,9 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${poppins.variable} h-full antialiased`}
+      className={`${albertSans.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className={`${albertSans.className} min-h-full flex flex-col`}>
         <Providers>
           {children}
         </Providers>

@@ -9,6 +9,12 @@ import {
   CalendarCheck,
   Check,
   ChevronDown,
+  SlidersHorizontal,
+  ArrowUpRight,
+  BadgePoundSterling,
+  ShieldCheck,
+  BookOpen,
+  X,
 } from "lucide-react";
 
 import coursesData from "../../data/courses.json";
@@ -16,55 +22,33 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import AppointmentModal from "../../components/AppointmentModal";
 
-/* =========================================================
-   TRADE IMAGES
-========================================================= */
-
 const tradeImages = {
   "general-labourer":
     "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80",
-
   carpentry:
     "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80",
-
   bricklaying:
     "https://images.unsplash.com/photo-1517089596392-fb9a9033e05b?auto=format&fit=crop&w=1200&q=80",
-
   "painting-decorating":
     "https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=1200&q=80",
-
   plastering:
     "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1200&q=80",
+  roofing:
+    "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80",
 };
 
 const DEFAULT_IMAGE =
   "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80";
 
-/* =========================================================
-   BADGE STYLES
-========================================================= */
-
 const getBadgeStyles = (text = "") => {
   const lowerText = text.toLowerCase();
 
-  if (lowerText.includes("green"))
-    return "bg-green-50 text-green-700 border-green-200";
+  if (lowerText.includes("black")) {
+    return "border-white/15 bg-white/[0.06] text-white";
+  }
 
-  if (lowerText.includes("blue"))
-    return "bg-blue-50 text-blue-700 border-blue-200";
-
-  if (lowerText.includes("gold"))
-    return "bg-yellow-50 text-yellow-700 border-yellow-200";
-
-  if (lowerText.includes("black"))
-    return "bg-gray-900 text-white border-gray-900";
-
-  return "bg-white text-secondary border-gray-200";
+  return "border-lime-400/25 bg-lime-400/10 text-lime-200";
 };
-
-/* =========================================================
-   MAIN
-========================================================= */
 
 function CoursesListing() {
   const searchParams = useSearchParams();
@@ -75,7 +59,6 @@ function CoursesListing() {
 
   const [selectedTrade, setSelectedTrade] = useState(initialTrade);
   const [selectedLevel, setSelectedLevel] = useState(initialLevel);
-
   const [selectedCard, setSelectedCard] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [appointmentCourse, setAppointmentCourse] = useState(null);
@@ -85,81 +68,71 @@ function CoursesListing() {
     setSelectedLevel(initialLevel);
   }, [initialTrade, initialLevel]);
 
-  /* =========================================================
-     FILTER OPTIONS
-  ========================================================= */
-
   const uniqueCards = [
     "all",
-    ...new Set(
-      coursesData.flatMap((trade) =>
-        trade.levels.map((lvl) => lvl.card)
-      )
-    ),
-  ];
+    ...new Set(coursesData.flatMap((trade) => trade.levels.map((lvl) => lvl.card))),
+  ].filter(Boolean);
 
-  /* =========================================================
-     URL UPDATE
-  ========================================================= */
+  const uniqueLevels = [
+    ...new Set(coursesData.flatMap((trade) => trade.levels.map((lvl) => lvl.level))),
+  ].sort((a, b) => a - b);
+
+  const totalPathways = coursesData.reduce(
+    (total, trade) => total + trade.levels.length,
+    0
+  );
 
   const updateFilters = (trade, level) => {
-    let url = `/courses`;
-
     const params = new URLSearchParams();
 
     if (trade && trade !== "all") params.set("trade", trade);
-
     if (level && level !== "all") params.set("level", level);
 
-    if (params.toString()) {
-      url += `?${params.toString()}`;
-    }
-
-    router.push(url, { scroll: false });
+    router.push(params.toString() ? `/courses?${params.toString()}` : "/courses", {
+      scroll: false,
+    });
   };
 
-  /* =========================================================
-     FILTER LOGIC
-  ========================================================= */
+  const clearFilters = () => {
+    setSelectedTrade("all");
+    setSelectedLevel("all");
+    setSelectedCard("all");
+    setSearchQuery("");
+    router.push("/courses", { scroll: false });
+  };
 
   const filteredData = coursesData.filter((trade) => {
-    /* TRADE */
+    if (selectedTrade !== "all" && trade.slug !== selectedTrade) return false;
 
-    if (
-      selectedTrade !== "all" &&
-      trade.slug !== selectedTrade
-    ) {
-      return false;
+    const query = searchQuery.trim().toLowerCase();
+    if (query) {
+      const searchText = [
+        trade.trade,
+        trade.slug,
+        trade.description,
+        trade.info,
+        ...trade.levels.flatMap((level) => [
+          level.course,
+          level.card,
+          level.tier,
+          `level ${level.level}`,
+        ]),
+      ]
+        .join(" ")
+        .toLowerCase();
+
+      if (!searchText.includes(query)) return false;
     }
-
-    /* SEARCH */
-
-    if (
-      searchQuery &&
-      !trade.trade
-        .toLowerCase()
-        .includes(searchQuery.toLowerCase())
-    ) {
-      return false;
-    }
-
-    /* LEVEL */
 
     if (selectedLevel !== "all") {
       const hasLevel = trade.levels.some(
-        (l) => l.level.toString() === selectedLevel.toString()
+        (level) => level.level.toString() === selectedLevel.toString()
       );
-
       if (!hasLevel) return false;
     }
 
-    /* CARD */
-
     if (selectedCard !== "all") {
-      const hasCard = trade.levels.some(
-        (l) => l.card === selectedCard
-      );
-
+      const hasCard = trade.levels.some((level) => level.card === selectedCard);
       if (!hasCard) return false;
     }
 
@@ -167,588 +140,297 @@ function CoursesListing() {
   });
 
   return (
-    <div
-      className="
-      min-h-screen
-      bg-[radial-gradient(circle_at_top,_rgba(255,221,87,0.10),transparent_25%),linear-gradient(to_bottom,#ffffff,#f8fafc)]
-      flex
-      flex-col
-      pt-24
-    "
-    >
+    <div className="min-h-screen overflow-hidden bg-[#020202] text-white">
       <Navbar />
 
-      <div className="w-full max-w-[1600px] mx-auto px-4 lg:px-8 py-8 flex-grow">
-        {/* HERO */}
-
-        <div className="mb-10">
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-secondary mb-4 leading-tight">
-            Find The Right
-            <span className="text-primary"> CSCS Course</span>
-          </h1>
-
-          <p className="text-lg text-muted max-w-3xl leading-relaxed">
-            Explore accredited CSCS, NVQ and construction training courses, then book an appointment with our team for guidance.
-          </p>
+      <main className="relative pt-28">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute inset-x-0 top-0 h-px bg-lime-400/35" />
+          <div className="absolute left-1/2 top-0 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-lime-400/[0.055] blur-3xl" />
+          <div className="absolute inset-0 opacity-[0.04] bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:72px_72px]" />
         </div>
 
-        {/* FILTER BAR */}
+        <div className="relative mx-auto w-full max-w-[1600px] px-4 pb-20 lg:px-8">
+          <section className="mb-9 grid gap-8 lg:grid-cols-[1fr_360px] lg:items-end">
+            <div>
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-lime-400/25 bg-lime-400/10 px-4 py-2 text-xs font-black text-lime-300">
+                <ShieldCheck className="h-4 w-4" />
+                Accredited Construction Training
+              </div>
 
-        <div className="sticky top-20 z-40 mb-8">
-          <div
-            className="
-            w-full
-            backdrop-blur-2xl
-            bg-white/80
-            border
-            border-white/50
-            shadow-[0_8px_30px_rgba(0,0,0,0.06)]
-            rounded-[22px]
-            p-3
-          "
-          >
-            <div className="flex flex-col lg:flex-row gap-3">
-              {/* SEARCH */}
+              <h1 className="max-w-4xl text-4xl font-black leading-[1.02] text-white sm:text-5xl lg:text-7xl">
+                Find the right
+                <span className="block text-lime-300">CSCS and NVQ course</span>
+              </h1>
 
+              <p className="mt-5 max-w-3xl text-sm leading-7 text-white/60 sm:text-base">
+                Explore construction training by trade, level, card type and course
+                pathway. Filter quickly, compare options and book guidance with our
+                advisors.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-3 gap-3">
+              {[
+                { label: "Trades", value: coursesData.length },
+                { label: "Pathways", value: totalPathways },
+                { label: "Support", value: "1:1" },
+              ].map((stat) => (
+                <div
+                  key={stat.label}
+                  className="rounded-xl border border-white/10 bg-white/[0.035] p-4 backdrop-blur-xl"
+                >
+                  <div className="text-2xl font-black text-lime-300">
+                    {stat.value}
+                  </div>
+                  <div className="mt-1 text-[11px] font-bold text-white/45">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="sticky top-24 z-30 mb-8 rounded-2xl border border-white/10 bg-[#070707]/90 p-3 shadow-[0_22px_70px_rgba(0,0,0,0.45),0_0_34px_rgba(163,230,53,0.08)] backdrop-blur-2xl">
+            <div className="flex flex-col gap-3 lg:flex-row">
               <div className="relative flex-1">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" />
-
+                <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-lime-300" />
                 <input
                   type="text"
-                  placeholder="Search courses, trades..."
+                  placeholder="Search courses, trades, cards..."
                   value={searchQuery}
-                  onChange={(e) =>
-                    setSearchQuery(e.target.value)
-                  }
-                  className="
-                    w-full
-                    pl-11
-                    pr-4
-                    py-3.5
-                    rounded-xl
-                    border
-                    border-gray-200
-                    bg-white
-                    text-sm
-                    font-medium
-                    focus:outline-none
-                    focus:ring-4
-                    focus:ring-primary/10
-                    focus:border-primary
-                  "
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="h-12 w-full rounded-xl border border-white/10 bg-white/[0.055] pl-11 pr-4 text-sm font-semibold text-white outline-none transition placeholder:text-white/35 focus:border-lime-400/55 focus:bg-white/[0.075] focus:shadow-[0_0_0_4px_rgba(163,230,53,0.12)]"
                 />
               </div>
 
-              {/* CARD FILTER */}
-
               <select
                 value={selectedCard}
-                onChange={(e) =>
-                  setSelectedCard(e.target.value)
-                }
-                className="
-                  lg:w-[240px]
-                  px-5
-                  py-3.5
-                  rounded-xl
-                  bg-white
-                  border
-                  border-gray-200
-                  text-sm
-                  font-semibold
-                  text-secondary
-                  focus:outline-none
-                  focus:ring-4
-                  focus:ring-primary/10
-                "
+                onChange={(e) => setSelectedCard(e.target.value)}
+                className="h-12 rounded-xl border border-white/10 bg-[#0b0b0b] px-4 text-sm font-semibold text-white outline-none transition focus:border-lime-400/55 focus:shadow-[0_0_0_4px_rgba(163,230,53,0.12)] lg:w-[250px]"
               >
                 {uniqueCards.map((card) => (
                   <option key={card} value={card}>
-                    {card === "all"
-                      ? "All CSCS Cards"
-                      : card}
+                    {card === "all" ? "All CSCS Cards" : card}
                   </option>
                 ))}
               </select>
 
-              {/* CLEAR */}
-
               <button
-                onClick={() => {
-                  setSelectedTrade("all");
-                  setSelectedLevel("all");
-                  setSelectedCard("all");
-                  setSearchQuery("");
-                }}
-                className="
-                  px-6
-                  py-3.5
-                  rounded-xl
-                  border
-                  border-gray-200
-                  bg-white
-                  text-sm
-                  font-semibold
-                  hover:border-primary
-                  hover:bg-primary/5
-                  transition-all
-                "
+                onClick={clearFilters}
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-5 text-sm font-bold text-white/75 transition hover:border-lime-400/35 hover:bg-lime-400/10 hover:text-lime-200"
               >
+                <X className="h-4 w-4" />
                 Clear
               </button>
             </div>
-          </div>
-        </div>
+          </section>
 
-        {/* CONTENT */}
+          <div className="flex flex-col gap-8 lg:flex-row">
+            <aside className="lg:w-[300px] lg:shrink-0">
+              <div className="sticky top-44 rounded-2xl border border-white/10 bg-[#070707]/88 p-5 shadow-[0_18px_50px_rgba(0,0,0,0.38)] backdrop-blur-2xl">
+                <div className="mb-6 flex items-center gap-2 text-sm font-black text-white">
+                  <SlidersHorizontal className="h-4 w-4 text-lime-300" />
+                  Filters
+                </div>
 
-        <div className="flex flex-col lg:flex-row gap-8">
-          {/* SIDEBAR */}
-
-          <div className="lg:w-[280px] shrink-0">
-            <div
-              className="
-              sticky
-              top-44
-              rounded-[26px]
-              border
-              border-white/50
-              bg-white/80
-              backdrop-blur-2xl
-              shadow-[0_10px_40px_rgba(0,0,0,0.05)]
-              p-6
-               
-            "
-            >
-              {/* TRADE */}
-
-              <div className="mb-8  ">
-                <h3 className="font-bold text-secondary mb-5">
-                  Trade
-                </h3>
-
-                <div className="space-y-4 max-h-[300px] overflow-y-auto custom-scrollbar">
+                <FilterGroup title="Trade">
+                  <FilterOption
+                    label="All Trades"
+                    active={selectedTrade === "all"}
+                    onChange={() => {
+                      setSelectedTrade("all");
+                      updateFilters("all", selectedLevel);
+                    }}
+                  />
                   {coursesData.map((trade) => (
-                    <label
+                    <FilterOption
                       key={trade.slug}
-                      className="flex items-center gap-3 cursor-pointer"
-                    >
-                      <div
-                        className={`
-                          w-5
-                          h-5
-                          rounded-md
-                          border
-                          flex
-                          items-center
-                          justify-center
-                          ${selectedTrade === trade.slug
-                            ? "bg-primary border-primary"
-                            : "border-gray-300 bg-white"
-                          }
-                        `}
-                      >
-                        {selectedTrade === trade.slug && (
-                          <Check className="w-3 h-3 text-secondary" />
-                        )}
-                      </div>
-
-                      <span
-                        className={`text-sm ${selectedTrade === trade.slug
-                          ? "font-semibold text-secondary"
-                          : "text-muted"
-                          }`}
-                      >
-                        {trade.trade}
-                      </span>
-
-                      <input
-                        type="radio"
-                        className="hidden"
-                        checked={
-                          selectedTrade === trade.slug
-                        }
-                        onChange={() => {
-                          setSelectedTrade(trade.slug);
-                          updateFilters(
-                            trade.slug,
-                            selectedLevel
-                          );
-                        }}
-                      />
-                    </label>
+                      label={trade.trade}
+                      active={selectedTrade === trade.slug}
+                      onChange={() => {
+                        setSelectedTrade(trade.slug);
+                        updateFilters(trade.slug, selectedLevel);
+                      }}
+                    />
                   ))}
+                </FilterGroup>
+
+                <div className="my-6 border-t border-white/10" />
+
+                <FilterGroup title="Level">
+                  <FilterOption
+                    label="All Levels"
+                    active={selectedLevel === "all"}
+                    onChange={() => {
+                      setSelectedLevel("all");
+                      updateFilters(selectedTrade, "all");
+                    }}
+                  />
+                  {uniqueLevels.map((level) => (
+                    <FilterOption
+                      key={level}
+                      label={`Level ${level}`}
+                      active={selectedLevel === level.toString()}
+                      onChange={() => {
+                        setSelectedLevel(level.toString());
+                        updateFilters(selectedTrade, level.toString());
+                      }}
+                    />
+                  ))}
+                </FilterGroup>
+              </div>
+            </aside>
+
+            <section className="min-w-0 flex-1">
+              <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+                <p className="text-sm font-semibold text-white/55">
+                  Showing <span className="text-lime-300">{filteredData.length}</span>{" "}
+                  courses
+                </p>
+
+                <div className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.035] px-4 py-2.5 text-sm font-semibold text-white/65">
+                  Sort by: A-Z
+                  <ChevronDown className="h-4 w-4 text-lime-300" />
                 </div>
               </div>
 
-              <div className="border-t border-gray-200 my-8" />
+              <div className="flex flex-col gap-5">
+                <AnimatePresence mode="popLayout">
+                  {filteredData.map((trade, idx) => {
+                    const imgSrc = tradeImages[trade.slug] || DEFAULT_IMAGE;
+                    const cards = [...new Set(trade.levels.map((level) => level.card))].filter(Boolean);
+                    const displayLevels = trade.levels.map((level) => level.level).join(", ");
+                    const pricedLevels = trade.levels.filter(
+                      (level) => level.bookingType === "booking" && level.price > 0
+                    );
+                    const minPrice = pricedLevels.length
+                      ? Math.min(...pricedLevels.map((level) => level.price))
+                      : null;
 
-              {/* LEVEL */}
-
-              <div className="">
-                <h3 className="font-bold text-secondary mb-5">
-                  Level
-                </h3>
-
-                <div className="space-y-4 max-h-[250px] overflow-y-auto custom-scrollbar">
-                  {[1, 2, 3, 4, 5, 6, 7].map((lvl) => (
-                    <label
-                      key={lvl}
-                      className="flex items-center gap-3 cursor-pointer"
-                    >
-                      <div
-                        className={`
-                          w-5
-                          h-5
-                          rounded-md
-                          border
-                          flex
-                          items-center
-                          justify-center
-                          ${selectedLevel ===
-                            lvl.toString()
-                            ? "bg-primary border-primary"
-                            : "border-gray-300 bg-white"
-                          }
-                        `}
+                    return (
+                      <motion.article
+                        key={trade.slug}
+                        layout
+                        initial={{ opacity: 0, y: 26, scale: 0.985 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -10, scale: 0.985 }}
+                        transition={{ delay: idx * 0.025, duration: 0.3, ease: "easeOut" }}
+                        className="group overflow-hidden rounded-2xl border border-white/10 bg-[#070707]/88 shadow-[0_18px_52px_rgba(0,0,0,0.38)] backdrop-blur-2xl transition-all duration-300 hover:border-lime-400/35 hover:bg-white/[0.045] hover:shadow-[0_24px_70px_rgba(0,0,0,0.48),0_0_34px_rgba(163,230,53,0.08)]"
                       >
-                        {selectedLevel ===
-                          lvl.toString() && (
-                            <Check className="w-3 h-3 text-secondary" />
-                          )}
-                      </div>
-
-                      <span
-                        className={`text-sm ${selectedLevel ===
-                          lvl.toString()
-                          ? "font-semibold text-secondary"
-                          : "text-muted"
-                          }`}
-                      >
-                        Level {lvl}
-                      </span>
-
-                      <input
-                        type="radio"
-                        className="hidden"
-                        checked={
-                          selectedLevel ===
-                          lvl.toString()
-                        }
-                        onChange={() => {
-                          setSelectedLevel(
-                            lvl.toString()
-                          );
-
-                          updateFilters(
-                            selectedTrade,
-                            lvl.toString()
-                          );
-                        }}
-                      />
-                    </label>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* COURSE LIST */}
-
-          <div className="flex-1">
-            <div className="flex items-center justify-between mb-7">
-              <p className="text-sm text-muted font-medium">
-                Showing {filteredData.length} courses
-              </p>
-
-              <div
-                className="
-                flex
-                items-center
-                gap-2
-                px-4
-                py-2.5
-                rounded-xl
-                bg-white
-                border
-                border-gray-200
-                text-sm
-                font-semibold
-                text-secondary
-              "
-              >
-                Sort by: A-Z
-
-                <ChevronDown className="w-4 h-4 opacity-60" />
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-6">
-              <AnimatePresence>
-                {filteredData.map((trade, idx) => {
-                  const imgSrc =
-                    tradeImages[trade.slug] ||
-                    DEFAULT_IMAGE;
-
-                  const uniqueCards = [
-                    ...new Set(
-                      trade.levels.map((l) => l.card)
-                    ),
-                  ].filter(Boolean);
-
-                  const displayLevels = trade.levels
-                    .map((l) => l.level)
-                    .join(", ");
-
-                  const hasPriced = trade.levels.some(
-                    (l) =>
-                      l.bookingType === "booking"
-                  );
-
-                  const minPrice = hasPriced
-                    ? Math.min(
-                      ...trade.levels
-                        .filter(
-                          (l) =>
-                            l.bookingType ===
-                            "booking"
-                        )
-                        .map((l) => l.price)
-                    )
-                    : null;
-
-                  return (
-                    <motion.div
-                      key={trade.slug}
-                      layout
-                      initial={{
-                        opacity: 0,
-                        y: 30,
-                      }}
-                      animate={{
-                        opacity: 1,
-                        y: 0,
-                      }}
-                      exit={{
-                        opacity: 0,
-                        y: -10,
-                      }}
-                      transition={{
-                        delay: idx * 0.03,
-                        duration: 0.3,
-                      }}
-                      className="
-                      group
-                      relative
-                      overflow-hidden
-                      rounded-[26px]
-                      border
-                      border-white/50
-                      bg-white/80
-                      backdrop-blur-2xl
-                      shadow-[0_10px_35px_rgba(0,0,0,0.05)]
-                      hover:shadow-[0_16px_40px_rgba(0,0,0,0.09)]
-                      transition-all
-                      duration-500
-                    "
-                    >
-                      <div className="flex flex-col lg:flex-row">
-                        {/* IMAGE */}
-
-                        <Link
-                          href={`/courses/${trade.slug}`}
-                          className="
-                          relative
-                          w-full
-                          lg:w-[260px]
-                          h-[190px]
-                          shrink-0
-                          overflow-hidden
-                          rounded-[22px]
-                          m-4
-                        "
-                        >
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent z-10" />
-
-                          <img
-                            src={imgSrc}
-                            alt={trade.trade}
-                            className="
-                              w-full
-                              h-full
-                              object-cover
-                              transition-transform
-                              duration-700
-                              group-hover:scale-110
-                            "
-                          />
-
-                          <div className="absolute bottom-4 left-4 z-20">
-                            <div className="px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-xl border border-white/20 text-white text-[11px] font-semibold">
+                        <div className="flex flex-col lg:flex-row">
+                          <Link
+                            href={`/courses/${trade.slug}`}
+                            className="relative m-3 h-[210px] overflow-hidden rounded-xl lg:w-[300px] lg:shrink-0"
+                          >
+                            <div className="absolute inset-0 z-10 bg-black/35" />
+                            <img
+                              src={imgSrc}
+                              alt={trade.trade}
+                              className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
+                            />
+                            <div className="absolute bottom-4 left-4 z-20 rounded-full border border-white/20 bg-black/45 px-3 py-1.5 text-[11px] font-bold text-white backdrop-blur-xl">
                               Level {displayLevels}
                             </div>
-                          </div>
-                        </Link>
+                          </Link>
 
-                        {/* CONTENT */}
-
-                        <div className="flex-1 p-5 flex flex-col justify-between">
-                          <div>
-                            {/* BADGES */}
-
-                            <div className="flex flex-wrap gap-2 mb-4">
-                              {uniqueCards.map(
-                                (card, i) => (
+                          <div className="flex min-w-0 flex-1 flex-col justify-between p-5">
+                            <div>
+                              <div className="mb-4 flex flex-wrap gap-2">
+                                {cards.map((card) => (
                                   <span
-                                    key={i}
-                                    className={`
-                                      px-3
-                                      py-1.5
-                                      text-[11px]
-                                      font-bold
-                                      rounded-full
-                                      border
-                                      ${getBadgeStyles(
-                                      card
-                                    )}
-                                    `}
+                                    key={card}
+                                    className={`rounded-full border px-3 py-1.5 text-[11px] font-bold ${getBadgeStyles(card)}`}
                                   >
                                     {card}
                                   </span>
-                                )
-                              )}
-                            </div>
+                                ))}
+                              </div>
 
-                            {/* TITLE */}
-
-                            <Link
-                              href={`/courses/${trade.slug}`}
-                            >
-                              <h3
-                                className="
-                                text-2xl
-                                lg:text-[28px]
-                                font-extrabold
-                                tracking-tight
-                                text-secondary
-                                mb-2
-                                group-hover:text-primary
-                                transition-colors
-                              "
-                              >
-                                {trade.trade}
-                              </h3>
-                            </Link>
-
-                            {/* META */}
-
-                            <div className="flex flex-wrap items-center gap-2 text-sm text-muted mb-3">
-                              <span>
-                                Level {displayLevels}
-                              </span>
-
-                              <span className="w-1 h-1 rounded-full bg-gray-300" />
-
-                              <span>
-                                {
-                                  trade.levels.length
-                                }{" "}
-                                Courses Available
-                              </span>
-                            </div>
-
-                            {/* DESC */}
-
-                            <p className="text-sm text-muted leading-relaxed max-w-2xl">
-                              {trade.description}
-                            </p>
-                          </div>
-
-                          {/* FOOTER */}
-
-                          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mt-5">
-                            {/* PRICE */}
-
-                            <div>
-                              {minPrice !== null ? (
-                                <>
-                                  <div className="text-xs text-muted mb-1">
-                                    Starting From
-                                  </div>
-
-                                  <div className="text-3xl font-extrabold text-secondary tracking-tight">
-                                    £{minPrice}
-                                  </div>
-                                </>
-                              ) : (
-                                <div className="text-sm font-semibold text-primary">
-                                  Contact For Pricing
-                                </div>
-                              )}
-                            </div>
-
-                            {/* BUTTONS */}
-
-                            <div className="flex gap-3 flex-wrap">
-                              <Link
-                                href={`/courses/${trade.slug}`}
-                                className="
-                                px-5
-                                py-2.5
-                                rounded-xl
-                                border
-                                border-gray-200
-                                bg-white
-                                hover:border-primary
-                                hover:bg-primary/5
-                                text-sm
-                                font-semibold
-                                transition-all
-                              "
-                              >
-                                View Details
+                              <Link href={`/courses/${trade.slug}`}>
+                                <h2 className="text-2xl font-black leading-tight text-white transition group-hover:text-lime-300 lg:text-3xl">
+                                  {trade.trade}
+                                </h2>
                               </Link>
 
-                              <button
-                                onClick={() =>
-                                  setAppointmentCourse({
-                                    trade: trade.trade,
-                                    course: trade.levels[0].course,
-                                  })
-                                }
-                                className="
-                                flex
-                                items-center
-                                gap-2
-                                bg-secondary
-                                hover:bg-primary
-                                text-white
-                                hover:text-secondary
-                                px-6
-                                py-2.5
-                                rounded-xl
-                                text-sm
-                                font-bold
-                                transition-all
-                                duration-300
-                              "
-                              >
-                                <CalendarCheck className="w-4 h-4" />
+                              <div className="mt-3 flex flex-wrap items-center gap-2 text-sm text-white/50">
+                                <span className="inline-flex items-center gap-1.5">
+                                  <BookOpen className="h-4 w-4 text-lime-300" />
+                                  Level {displayLevels}
+                                </span>
+                                <span className="h-1 w-1 rounded-full bg-white/25" />
+                                <span>{trade.levels.length} pathways available</span>
+                              </div>
 
-                                Book an Appointment
-                              </button>
+                              <p className="mt-4 max-w-3xl text-sm leading-7 text-white/58">
+                                {trade.description}
+                              </p>
+                            </div>
+
+                            <div className="mt-5 flex flex-col gap-4 border-t border-white/10 pt-5 md:flex-row md:items-center md:justify-between">
+                              <div>
+                                {minPrice !== null ? (
+                                  <>
+                                    <div className="text-xs font-bold text-white/40">
+                                      Starting From
+                                    </div>
+                                    <div className="mt-1 flex items-center gap-1 text-3xl font-black text-white">
+                                      <BadgePoundSterling className="h-6 w-6 text-lime-300" />
+                                      {"\u00a3"}
+                                      {minPrice}
+                                    </div>
+                                  </>
+                                ) : (
+                                  <div className="text-sm font-bold text-lime-300">
+                                    Contact For Pricing
+                                  </div>
+                                )}
+                              </div>
+
+                              <div className="flex flex-wrap gap-3">
+                                <Link
+                                  href={`/courses/${trade.slug}`}
+                                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-5 py-3 text-sm font-bold text-white/80 transition hover:border-lime-400/35 hover:bg-lime-400/10 hover:text-lime-200"
+                                >
+                                  View Details
+                                  <ArrowUpRight className="h-4 w-4" />
+                                </Link>
+
+                                <button
+                                  onClick={() =>
+                                    setAppointmentCourse({
+                                      trade: trade.trade,
+                                      course: trade.levels[0].course,
+                                    })
+                                  }
+                                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-lime-400 px-5 py-3 text-sm font-black text-black transition hover:bg-lime-300 hover:shadow-[0_0_28px_rgba(163,230,53,0.25)]"
+                                >
+                                  <CalendarCheck className="h-4 w-4" />
+                                  Book Appointment
+                                </button>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </AnimatePresence>
-            </div>
+                      </motion.article>
+                    );
+                  })}
+                </AnimatePresence>
+
+                {filteredData.length === 0 && (
+                  <div className="rounded-2xl border border-white/10 bg-white/[0.035] px-6 py-16 text-center">
+                    <p className="text-2xl font-black text-white">No courses found</p>
+                    <p className="mx-auto mt-3 max-w-lg text-sm leading-7 text-white/55">
+                      Try clearing one filter or searching for another trade, card or
+                      level.
+                    </p>
+                  </div>
+                )}
+              </div>
+            </section>
           </div>
         </div>
-      </div>
+      </main>
 
       <AppointmentModal
         open={Boolean(appointmentCourse)}
@@ -761,12 +443,49 @@ function CoursesListing() {
   );
 }
 
+function FilterGroup({ title, children }) {
+  return (
+    <div>
+      <h3 className="mb-4 text-xs font-black uppercase text-lime-300">{title}</h3>
+      <div className="max-h-[310px] space-y-2 overflow-y-auto pr-1 custom-scrollbar">
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function FilterOption({ label, active, onChange }) {
+  return (
+    <label className="group flex cursor-pointer items-center gap-3 rounded-xl px-2 py-2 transition hover:bg-white/[0.035]">
+      <span
+        className={`flex h-5 w-5 items-center justify-center rounded-md border transition ${
+          active
+            ? "border-lime-400 bg-lime-400"
+            : "border-white/20 bg-white/[0.03] group-hover:border-lime-400/45"
+        }`}
+      >
+        {active && <Check className="h-3 w-3 text-black" />}
+      </span>
+
+      <span
+        className={`text-sm transition ${
+          active ? "font-bold text-white" : "text-white/58 group-hover:text-white/80"
+        }`}
+      >
+        {label}
+      </span>
+
+      <input type="radio" className="hidden" checked={active} onChange={onChange} />
+    </label>
+  );
+}
+
 export default function Page() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+        <div className="flex min-h-screen items-center justify-center bg-[#020202]">
+          <div className="h-10 w-10 animate-spin rounded-full border-4 border-lime-400 border-t-transparent" />
         </div>
       }
     >

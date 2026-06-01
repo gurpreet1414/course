@@ -2,7 +2,6 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 
 const stats = [
   { value: "15,000+", label: "Qualified Professionals" },
@@ -13,82 +12,86 @@ const stats = [
 
 function StatsCTA() {
   return (
-    <section className="py-24 bg-gradient-to-b from-white to-green-50 relative overflow-hidden">
-      {/* Decorative Blur Elements */}
-      <div className="absolute top-10 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-10 right-10 w-80 h-80 bg-secondary/10 rounded-full blur-3xl"></div>
+    <section className="py-24 bg-[#020202] relative overflow-hidden">
+      {/* Soft Background Elements - No Gradient */}
+      <div className="absolute top-10 left-10 w-72 h-72 bg-white/[0.035] rounded-full blur-3xl"></div>
+      <div className="absolute bottom-10 right-10 w-80 h-80 bg-lime-400/[0.04] rounded-full blur-3xl"></div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        {/* Section Heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="max-w-3xl mb-14"
+        >
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.08]">
+            Trusted Construction Training, Proven Results
+          </h2>
+        </motion.div>
 
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Side Stats */}
           <div className="grid grid-cols-2 gap-6">
             {stats.map((stat, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{
+                  duration: 0.5,
+                  delay: index * 0.08,
+                  ease: "easeOut",
+                }}
                 whileHover={{ y: -6 }}
-                className="group bg-white/70 backdrop-blur-xl border border-green-100 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300"
+                className="group bg-white/[0.035] backdrop-blur-xl border border-white/[0.07] rounded-3xl p-8 hover:border-lime-400/30 hover:bg-white/[0.06] shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-all duration-500"
               >
-                <span className="text-4xl sm:text-5xl font-extrabold text-primary tracking-tight block mb-2">
+                <motion.span
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.45,
+                    delay: 0.15 + index * 0.08,
+                    ease: "easeOut",
+                  }}
+                  className="text-4xl sm:text-5xl font-extrabold text-lime-300 tracking-tight block mb-2"
+                >
                   {stat.value}
-                </span>
-                <span className="text-sm font-semibold text-gray-700 tracking-wide">
+                </motion.span>
+
+                <span className="text-sm font-semibold text-white/55 tracking-wide">
                   {stat.label}
                 </span>
 
-                {/* Premium Accent Line */}
-                <div className="mt-5 h-1 w-10 bg-primary rounded-full group-hover:w-16 transition-all duration-300"></div>
+                {/* Accent Line */}
+                <div className="mt-5 h-1 w-10 bg-lime-300/45 rounded-full group-hover:w-16 group-hover:bg-lime-300 transition-all duration-300"></div>
               </motion.div>
             ))}
           </div>
 
-          {/* Right Side CTA */}
+          {/* Right Side Video */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
+            initial={{ opacity: 0, scale: 0.97 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative rounded-[32px] overflow-hidden min-h-[500px] shadow-2xl border border-white/20"
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{ duration: 0.65, ease: "easeOut" }}
+            className="relative rounded-[32px] overflow-hidden min-h-[500px] shadow-[0_20px_60px_rgba(0,0,0,0.5)] border border-white/[0.08]"
           >
-            {/* Background Image */}
-            <img
-              src="/bg.png"
-              alt="Career growth"
+            <video
+              src="/construction.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
               className="absolute inset-0 w-full h-full object-cover"
             />
 
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-black/20"></div>
-
-            {/* Floating Glass Card */}
-            <div className="relative z-10 h-full flex items-center p-8 sm:p-12 lg:p-14">
-              <div className="max-w-md bg-white rounded-3xl p-8 shadow-2xl">
-                <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-wider uppercase mb-5">
-                  Career Growth
-                </span>
-
-                <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight mb-5">
-                  Ready to Upgrade <br />
-                  Your Career?
-                </h2>
-
-                <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-8">
-                  Join thousands of professionals who trust us to build
-                  qualifications, grow skills, and unlock better opportunities.
-                </p>
-
-                <button className="group bg-primary hover:bg-secondary text-white font-semibold text-sm px-8 py-4 rounded-full shadow-xl transition-all duration-300 flex items-center gap-2 hover:scale-105">
-                  Apply Now
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </button>
-              </div>
-            </div>
-
-            {/* Floating Glow */}
+            {/* Simple Dark Overlay - No Gradient */}
+            <div className="absolute inset-0 bg-black/30"></div>
           </motion.div>
         </div>
       </div>

@@ -128,12 +128,12 @@ const customStyles = {
 /* =========================
    Animated Grid with Mouse Tracking Spotlight
 ========================= */
-function AnimatedGrid({ mouseX, mouseY, isPointerActive, ripples }) {
+function AnimatedGrid({ mouseX, mouseY }) {
     return (
         <div className="pointer-events-none absolute inset-0 overflow-hidden select-none">
             {/* Grid pattern */}
             <div
-                className={`absolute inset-0 transition-all duration-300 ${isPointerActive ? "opacity-[0.07]" : "opacity-[0.035]"}`}
+                className="absolute inset-0 opacity-[0.035] transition-all duration-300"
                 style={{
                     backgroundImage:
                         "linear-gradient(to right, #a3e635 1px, transparent 1px), linear-gradient(to bottom, #a3e635 1px, transparent 1px)",
@@ -142,50 +142,12 @@ function AnimatedGrid({ mouseX, mouseY, isPointerActive, ripples }) {
             />
 
             {/* Spotlight Radial Glow following the mouse */}
-            <motion.div
-                animate={{ opacity: isPointerActive ? 1 : 0 }}
-                transition={{ duration: 0.25, ease: "easeOut" }}
-                className="absolute inset-0"
+            <div
+                className="absolute inset-0 transition-opacity duration-300 opacity-100"
                 style={{
-                    background: `radial-gradient(520px circle at ${mouseX}px ${mouseY}px, rgba(255,255,255,0.11), rgba(163,230,53,0.07) 32%, transparent 72%)`,
+                    background: `radial-gradient(600px circle at ${mouseX}px ${mouseY}px, rgba(163, 230, 53, 0.075), transparent 80%)`,
                 }}
             />
-
-            {/* Hover cursor ring */}
-            <motion.div
-                animate={{
-                    opacity: isPointerActive ? 1 : 0,
-                    scale: isPointerActive ? [0.92, 1.08, 0.92] : 0.86,
-                }}
-                transition={{
-                    opacity: { duration: 0.2, ease: "easeOut" },
-                    scale: { duration: 2.2, repeat: Infinity, ease: "easeInOut" },
-                }}
-                className="absolute h-28 w-28 rounded-full border border-white/25 shadow-[0_0_34px_rgba(255,255,255,0.18)]"
-                style={{
-                    left: mouseX,
-                    top: mouseY,
-                    x: "-50%",
-                    y: "-50%",
-                }}
-            />
-
-            {/* Click ripples on the background */}
-            {ripples.map((ripple) => (
-                <motion.span
-                    key={ripple.id}
-                    initial={{ opacity: 0.45, scale: 0.2 }}
-                    animate={{ opacity: 0, scale: 2.7 }}
-                    transition={{ duration: 0.85, ease: "easeOut" }}
-                    className="absolute h-24 w-24 rounded-full border border-white/45 shadow-[0_0_40px_rgba(255,255,255,0.22)]"
-                    style={{
-                        left: ripple.x,
-                        top: ripple.y,
-                        x: "-50%",
-                        y: "-50%",
-                    }}
-                />
-            ))}
 
             {/* Radial glows */}
             <div className="absolute left-1/2 top-1/3 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-lime-500/[0.04] blur-[100px]" />
@@ -255,46 +217,15 @@ function HeroSection() {
     const [selectedLevel, setSelectedLevel] = useState("");
     const [mouseCoords, setMouseCoords] = useState({ x: 0, y: 0 });
     const [hoveredNode, setHoveredNode] = useState(null);
-    const [isHeroPointerActive, setIsHeroPointerActive] = useState(false);
-    const [heroRipples, setHeroRipples] = useState([]);
     const containerRef = useRef(null);
-
-    const isFilterTarget = (target) =>
-        Boolean(target?.closest?.("[data-hero-filter]"));
 
     const handleMouseMove = (e) => {
         if (!containerRef.current) return;
-
-        if (isFilterTarget(e.target)) {
-            setIsHeroPointerActive(false);
-            return;
-        }
-
         const rect = containerRef.current.getBoundingClientRect();
         setMouseCoords({
             x: e.clientX - rect.left,
             y: e.clientY - rect.top,
         });
-        setIsHeroPointerActive(true);
-    };
-
-    const handleHeroClick = (e) => {
-        if (!containerRef.current || isFilterTarget(e.target)) return;
-
-        const rect = containerRef.current.getBoundingClientRect();
-        const id = `${Date.now()}-${Math.round(e.clientX)}-${Math.round(e.clientY)}`;
-        const ripple = {
-            id,
-            x: e.clientX - rect.left,
-            y: e.clientY - rect.top,
-        };
-
-        setHeroRipples((currentRipples) => [...currentRipples.slice(-4), ripple]);
-        window.setTimeout(() => {
-            setHeroRipples((currentRipples) =>
-                currentRipples.filter((currentRipple) => currentRipple.id !== id)
-            );
-        }, 900);
     };
 
     const handleSearch = () => {
@@ -356,16 +287,9 @@ function HeroSection() {
         <section
             ref={containerRef}
             onMouseMove={handleMouseMove}
-            onMouseLeave={() => setIsHeroPointerActive(false)}
-            onClick={handleHeroClick}
             className="relative min-h-[95vh] flex items-center justify-center overflow-hidden bg-[#020202] px-4 sm:px-6 lg:px-8 py-28"
         >
-            <AnimatedGrid
-                mouseX={mouseCoords.x}
-                mouseY={mouseCoords.y}
-                isPointerActive={isHeroPointerActive}
-                ripples={heroRipples}
-            />
+            <AnimatedGrid mouseX={mouseCoords.x} mouseY={mouseCoords.y} />
 
             {/* INTERACTIVE SVG TRADE CONNECTING NETWORK */}
             <svg
@@ -544,8 +468,6 @@ function HeroSection() {
 
                 {/* SEARCH CONSOLE (GLASS COCKPIT PANEL) */}
                 <motion.div
-                    data-hero-filter
-                    onMouseEnter={() => setIsHeroPointerActive(false)}
                     initial={{ opacity: 0, y: 30, scale: 0.98 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     transition={{ duration: 0.7, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}

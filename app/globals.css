@@ -19,7 +19,7 @@
   --muted: #6b7280;
 
   /* Font */
-  --font-sans: var(--font-poppins);
+  --font-sans: var(--font-albert-sans);
 }
 
 @theme inline {
@@ -33,7 +33,7 @@
   --color-border: var(--border);
   --color-muted: var(--muted);
 
-  --font-sans: var(--font-poppins);
+  --font-sans: var(--font-albert-sans);
 }
 
 html {
@@ -46,9 +46,45 @@ body {
       #f7faf7 40%,
       #eefbf2 100%);
   color: var(--foreground);
-  font-family: var(--font-poppins), "Inter", Arial, Helvetica, sans-serif;
+  font-family: var(--font-albert-sans), "Inter", Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: uppercase;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+:where(h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  a,
+  span,
+  button,
+  label,
+  li,
+  strong,
+  b,
+  small,
+  input,
+  textarea,
+  select,
+  option) {
+  font-family: var(--font-albert-sans), "Inter", Arial, Helvetica, sans-serif;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  text-transform: uppercase;
+}
+
+:where(.font-medium,
+  .font-semibold,
+  .font-bold,
+  .font-extrabold,
+  .font-black) {
+  font-weight: 400 !important;
 }
 
 /* Better UI feel */
