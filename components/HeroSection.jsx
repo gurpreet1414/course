@@ -471,7 +471,7 @@ function HeroSection() {
                     const canSelectNode =
                         Boolean(selectedLevel) &&
                         nodeTrade?.levels.some((lvl) => lvl.level.toString() === selectedLevel.toString());
-                    const isHovered = hoveredNode === node.id;
+                    const isHovered = true;
                     const isSelected = canSelectNode && selectedTrade === node.slug;
                     const isActive = isHovered || isSelected;
 
@@ -616,7 +616,7 @@ function HeroSection() {
                     initial={{ opacity: 0, y: 30, scale: 0.98 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     transition={{ duration: 0.7, delay: shouldReduceMotion ? 0 : 3.65, ease: [0.16, 1, 0.3, 1] }}
-                    className={`relative mt-10 w-full max-w-3xl mx-auto bg-black/60 backdrop-blur-2xl rounded-2xl border shadow-[0_25px_60px_rgba(0,0,0,0.65)] p-3 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 z-30 transition-all duration-300 hover:border-lime-400/35 hover:shadow-[0_25px_70px_rgba(163,230,53,0.12)] ${selectedLevel || selectedTrade ? "border-lime-400/35" : "border-white/15"}`}
+                    className={`relative mt-10 w-full max-w-3xl mx-auto bg-black/60 backdrop-blur-2xl rounded-2xl border shadow-[0_25px_60px_rgba(0,0,0,0.65)] p-3 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 z-30 transition-all duration-300 hover:border-lime-400/35 hover:shadow-[0_25px_70px_rgba(163,230,53,0.12)] border-lime-400/35`}
                 >
                     {/* LEVEL SELECT */}
                     <div className={`w-full sm:w-[35%] rounded-2xl px-1 transition-all duration-300 ${selectedLevel ? "shadow-[0_0_24px_rgba(163,230,53,0.12)]" : ""}`}>

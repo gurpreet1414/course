@@ -48,7 +48,7 @@ function ServiceCards() {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
             whileHover={{ y: -5 }}
-            className="group relative overflow-hidden rounded-2xl p-6 flex flex-col justify-between bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] hover:border-lime-400/30 hover:bg-white/[0.06] shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-all duration-500 cursor-pointer"
+            className="group relative overflow-hidden rounded-2xl p-6 flex flex-col justify-between bg-white/[0.03] backdrop-blur-xl border border-lime-400/30 hover:bg-white/[0.06] shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-all duration-500 cursor-pointer"
           >
             {/* Glow effect */}
             <div className={`absolute -right-10 -top-10 h-28 w-28 rounded-full ${service.glow} blur-3xl opacity-0 transition duration-500 group-hover:opacity-100`} />

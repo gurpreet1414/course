@@ -313,7 +313,7 @@ function CareerSlide({ path, index, scrollYProgress }) {
             className="mt-10 flex flex-wrap items-center gap-4"
           >
             <button className="bg-lime-400 hover:bg-lime-300 group inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-semibold text-black shadow-[0_0_30px_rgba(163,230,53,0.2)] transition-all duration-300 hover:scale-105">
-              View {path.cardName}
+              View Courses
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </button>
 

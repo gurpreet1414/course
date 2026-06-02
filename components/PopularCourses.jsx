@@ -723,171 +723,53 @@ function CourseStackCard({
 }) {
   const Icon = course.icon;
   const isActive = activeIndex === index;
-  const stackDistance = Math.abs(activeIndex - index);
-  const zIndex = isActive ? total + 10 : total - stackDistance;
-
+  const springConfig = { stiffness: 100, damping: 30, mass: 0.5 };
+  
   const current = useTransform(progress, (value) => value * (total - 1));
   const diff = useTransform(current, (value) => value - index);
 
-const y = useTransform(diff, (distance) => {
-  if (distance >= 0) {
-    const depth = clamp(distance, 0, 4);
-    return -depth * 32;
-  }
+  const y = useSpring(useTransform(diff, (distance) => {
+    return distance >= 0 ? -distance * 32 : Math.abs(distance) * 28 + 8;
+  }), springConfig);
 
-  const depth = clamp(Math.abs(distance), 0, 4);
-  return depth * 28 + 8;
-});
-
-  const scale = useTransform(diff, (distance) => {
-    if (distance >= 0) {
-      return 1 - clamp(distance, 0, 4) * 0.032;
-    }
-
-    return 1 - clamp(Math.abs(distance), 0, 4) * 0.028;
-  });
-
-  const rotateZ = useTransform(diff, (distance) => {
-    if (shouldReduceMotion) return 0;
-
-    if (distance >= 0) {
-      return -clamp(distance, 0, 4) * 0.45;
-    }
-
-    return clamp(Math.abs(distance), 0, 4) * 0.35;
-  });
-
-  const opacity = useTransform(diff, (distance) => {
-    const depth = Math.abs(distance);
-
-    if (depth > 4.2) return 0;
-    if (depth > 3) {
-      return 1 - (depth - 3) / 1.2;
-    }
-
-    return distance > 0 ? 0.9 : 1;
-  });
-
-  const imageScale = useTransform(diff, [-1, 0, 1], [1.05, 1, 1.03]);
-  const contentY = useTransform(diff, [-0.65, 0, 0.9], [18, 0, -24]);
-
-  const contentOpacity = useTransform(
-    diff,
-    [-0.75, -0.15, 0, 0.42, 0.95],
-    [0, 0.32, 1, 0.45, 0]
-  );
+  const opacity = useTransform(diff, [-0.5, 0, 0.5], [0.3, 1, 0.3]);
+  const scale = useTransform(diff, [-0.5, 0, 0.5], [0.96, 1, 0.96]);
 
   return (
     <motion.article
-      aria-hidden={!isActive}
-      style={{
-        y,
-        scale,
-        rotateZ,
-        opacity,
-        zIndex,
-      }}
-      className={`absolute inset-x-0 top-0 mx-auto h-full w-full max-w-6xl overflow-hidden rounded-[1.35rem] border border-white/15 bg-[#0b1710] shadow-[0_30px_90px_rgba(0,0,0,0.45)] will-change-transform sm:rounded-[2rem] ${
-        isActive ? "pointer-events-auto" : "pointer-events-none"
-      }`}
+      style={{ y, scale, opacity, zIndex: isActive ? 20 : index }}
+      className="absolute inset-x-0 top-0 mx-auto h-full w-full max-w-6xl overflow-hidden rounded-[2rem] border border-white/10 bg-[#07120c] shadow-2xl"
     >
-      <motion.img
-        src={course.image}
-        alt={course.title}
-        style={{ scale: imageScale }}
-        className="absolute inset-0 h-full w-full object-cover"
-      />
+      {/* Background Image with Gradient Overlay */}
+      <div className="absolute inset-0 z-0">
+        <img src={course.image} alt={course.title} className="h-full w-full object-cover opacity-50" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#07120c] via-[#07120c]/80 to-transparent" />
+      </div>
 
-      <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/68 to-black/25" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/82 via-transparent to-black/28" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(149,193,31,0.28),transparent_34%)]" />
-      <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-[#95c11f]/80 to-transparent" />
-
-      <motion.div
-        style={{
-          y: contentY,
-          opacity: contentOpacity,
-        }}
-        className="relative z-10 flex h-full flex-col justify-between gap-5 p-5 sm:p-8 lg:p-12"
-      >
-        <div className="flex items-start justify-between gap-3">
-          <div className="flex min-w-0 items-start gap-3 sm:gap-4">
-            <div className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[#95c11f]/35 bg-[#95c11f]/15 shadow-[0_0_34px_rgba(149,193,31,0.28)] backdrop-blur sm:h-16 sm:w-16">
-              {!shouldReduceMotion && (
-                <motion.span
-                  animate={{ rotate: 360 }}
-                  transition={{
-                    duration: 10,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                  className="absolute inset-[-5px] rounded-[1.2rem] border border-dashed border-[#95c11f]/35 sm:rounded-[1.35rem]"
-                />
-              )}
-
-              <Icon className="relative z-10 h-6 w-6 text-[#caff5f] sm:h-8 sm:w-8" />
-            </div>
-
-            <div className="min-w-0">
-              <p className="text-[10px] font-black uppercase text-[#caff5f] sm:text-xs">
-                Course 0{index + 1}
-              </p>
-
-              <h3 className="mt-2 max-w-3xl text-2xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-                {course.title}
-              </h3>
-            </div>
-          </div>
-
-          <div className="hidden rounded-full border border-white/10 bg-black/35 px-4 py-2 text-xs font-black uppercase text-white backdrop-blur sm:block">
-            {index + 1}/{total}
-          </div>
-        </div>
-
-        <div className="max-w-3xl">
-          <p className="max-w-2xl text-xs leading-6 text-white sm:text-base sm:leading-7 lg:text-lg">
+      <div className="relative z-10 flex h-full flex-col justify-center p-8 sm:p-16 max-w-2xl">
+        <div className="flex flex-col gap-6">
+          <p className="text-[#caff5f] font-bold tracking-widest uppercase text-xs">
+            Course 0{index + 1}
+          </p>
+          <h3 className="text-4xl sm:text-6xl font-black text-white leading-tight">
+            {course.title}
+          </h3>
+          <p className="text-white/80 text-lg leading-relaxed max-w-lg">
             {course.description}
           </p>
 
-          <div className="mt-5 grid max-w-xl grid-cols-2 gap-3 sm:mt-7">
-            <InfoPill
-              icon={Clock3}
-              label="Duration"
-              value={course.duration}
-              shouldReduceMotion={shouldReduceMotion}
-            />
-
-            <InfoPill
-              icon={BadgePoundSterling}
-              label="Starting from"
-              value={course.price}
-              shouldReduceMotion={shouldReduceMotion}
-            />
-          </div>
-
-          <div className="mt-5 flex flex-wrap items-center gap-2 sm:mt-7 sm:gap-3">
-            <motion.div
-              whileHover={shouldReduceMotion ? undefined : { y: -3, scale: 1.02 }}
-              whileTap={shouldReduceMotion ? undefined : { scale: 0.97 }}
-              className="inline-flex"
+          {/* Restored CTA Button */}
+          <div className="mt-4">
+            <Link
+              href="/courses"
+              className="inline-flex items-center gap-3 rounded-full bg-[#95c11f] px-8 py-4 font-black text-[#07120c] transition-transform hover:scale-105"
             >
-              <Link
-                href="/courses"
-                tabIndex={isActive ? 0 : -1}
-                className="inline-flex items-center gap-2 rounded-full bg-[#95c11f] px-5 py-3 text-xs font-black text-[#07120c] shadow-[0_18px_45px_rgba(149,193,31,0.28)] transition hover:bg-lime-300 sm:px-6 sm:text-sm"
-              >
-                View Course
-                <ArrowUpRight className="h-4 w-4" />
-              </Link>
-            </motion.div>
-
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/30 px-4 py-3 text-[11px] font-semibold text-white backdrop-blur sm:text-xs">
-              <CheckCircle2 className="h-4 w-4 shrink-0 text-[#caff5f]" />
-              Flexible booking available
-            </div>
+              View Course
+              <ArrowUpRight className="h-5 w-5" />
+            </Link>
           </div>
         </div>
-      </motion.div>
+      </div>
     </motion.article>
   );
 }
