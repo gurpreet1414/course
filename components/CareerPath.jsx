@@ -44,7 +44,7 @@ function AnimatedWords({ text, scrollYProgress, start, middle, end }) {
   const words = text.split(" ");
 
   return (
-    <h3 className="mb-5 flex max-w-2xl flex-wrap gap-x-3 text-4xl font-extrabold leading-tight text-foreground sm:text-5xl lg:text-6xl">
+    <h3 className="mb-2 sm:mb-5 flex max-w-2xl flex-wrap gap-x-2 sm:gap-x-3 text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-foreground">
       {words.map((word, wordIndex) => {
         const wordStart = start + wordIndex * 0.008;
         const wordEnd = end - 0.06;
@@ -74,18 +74,9 @@ function FloatingBackground({ scrollYProgress }) {
 
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
-      <motion.div
-        style={{ rotate, y: yOne, scale }}
-        className="absolute -left-24 top-24 h-72 w-72 rounded-full bg-glow-primary blur-3xl"
-      />
-      <motion.div
-        style={{ rotate, y: yTwo }}
-        className="absolute -right-24 bottom-20 h-96 w-96 rounded-full bg-glow-secondary blur-3xl"
-      />
-      <motion.div
-        style={{ y: yOne }}
-        className="absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 rounded-full bg-glow-primary blur-2xl"
-      />
+      <motion.div style={{ rotate, y: yOne, scale }} className="absolute -left-24 top-24 h-72 w-72 rounded-full bg-glow-primary blur-3xl" />
+      <motion.div style={{ rotate, y: yTwo }} className="absolute -right-24 bottom-20 h-96 w-96 rounded-full bg-glow-secondary blur-3xl" />
+      <motion.div style={{ y: yOne }} className="absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 rounded-full bg-glow-primary blur-2xl" />
     </div>
   );
 }
@@ -100,7 +91,6 @@ function CareerSlide({ path, index, scrollYProgress }) {
   const middle = (holdStart + holdEnd) / 2;
   const isFirst = index === 0;
 
-  // Use the exact same animation transforms
   const opacity = useTransform(scrollYProgress, [start, enter, holdStart, holdEnd, end], [0, 1, 1, 1, 0]);
   const y = useTransform(scrollYProgress, [start, enter, holdStart, holdEnd, end], isFirst ? [80, 0, 0, 0, -120] : [150, 0, 0, 0, -150]);
   const scale = useTransform(scrollYProgress, [start, enter, holdStart, holdEnd, end], isFirst ? [0.96, 1, 1, 1, 1.04] : [0.72, 1, 1, 1, 1.08]);
@@ -108,8 +98,9 @@ function CareerSlide({ path, index, scrollYProgress }) {
   const rotateY = useTransform(scrollYProgress, [start, enter, holdStart, holdEnd, end], isFirst ? [0, 0, 0, 0, 10] : [-22, 0, 0, 0, 22]);
   const z = useTransform(scrollYProgress, [start, enter, holdStart, holdEnd, end], isFirst ? [0, 0, 0, 0, 120] : [-420, 0, 0, 0, 260]);
   
-  const contentX = useTransform(scrollYProgress, [start, enter, holdStart, holdEnd, end], isFirst ? [-40, 0, 0, 0, 70] : [-120, 0, 0, 0, 90]);
-  const imageX = useTransform(scrollYProgress, [start, enter, holdStart, holdEnd, end], isFirst ? [40, 0, 0, 0, -90] : [150, 0, 0, 0, -110]);
+  // Converted to percentages to prevent horizontal overflow on mobile
+  const contentX = useTransform(scrollYProgress, [start, enter, holdStart, holdEnd, end], isFirst ? ["-10%", "0%", "0%", "0%", "15%"] : ["-30%", "0%", "0%", "0%", "20%"]);
+  const imageX = useTransform(scrollYProgress, [start, enter, holdStart, holdEnd, end], isFirst ? ["10%", "0%", "0%", "0%", "-20%"] : ["30%", "0%", "0%", "0%", "-25%"]);
   
   const imageRotateX = useTransform(scrollYProgress, [start, enter, holdStart, holdEnd, end], isFirst ? [0, 0, 0, 0, -10] : [24, 0, 0, 0, -18]);
   const imageRotateY = useTransform(scrollYProgress, [start, enter, holdStart, holdEnd, end], isFirst ? [0, 0, 0, 0, 12] : [-28, 0, 0, 0, 22]);
@@ -124,30 +115,30 @@ function CareerSlide({ path, index, scrollYProgress }) {
       style={{ opacity, y, scale, rotateX, rotateY, z, transformPerspective: 1400, transformStyle: "preserve-3d" }}
       className="absolute inset-0 flex items-center will-change-transform"
     >
-      <div className="grid w-full grid-cols-1 items-center gap-10 lg:gap-12 lg:grid-cols-2">
+      <div className="grid w-full grid-cols-1 items-center gap-6 sm:gap-10 lg:gap-12 lg:grid-cols-2">
         {/* Left Content */}
         <motion.div style={{ x: contentX }} className="order-2 lg:order-1">
           <motion.div
             style={{ opacity: descriptionOpacity, y: descriptionY }}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-glass-border bg-glass-surface px-5 py-2 shadow-lg backdrop-blur-md"
+            className="mb-4 sm:mb-6 inline-flex items-center gap-2 rounded-full border border-glass-border bg-glass-surface px-4 py-1.5 sm:px-5 sm:py-2 shadow-lg backdrop-blur-md"
           >
-            <Sparkles className="h-4 w-4 text-primary-text" />
-            <span className="text-xs font-bold uppercase tracking-widest text-primary-text">{path.level}</span>
-            <CheckCircle2 className="h-4 w-4 text-primary-text" />
+            <Sparkles className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary-text" />
+            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-primary-text">{path.level}</span>
+            <CheckCircle2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary-text" />
           </motion.div>
 
           <AnimatedWords text={path.title} scrollYProgress={scrollYProgress} start={start} middle={middle} end={end} />
 
           <motion.p
             style={{ opacity: descriptionOpacity, y: descriptionY }}
-            className="max-w-xl text-lg font-medium leading-8 text-foreground/90 sm:text-xl"
+            className="max-w-xl text-sm sm:text-xl font-medium leading-relaxed sm:leading-8 text-foreground opacity-90"
           >
             {path.description}
           </motion.p>
 
           <motion.div
             style={{ opacity: descriptionOpacity, y: descriptionY }}
-            className="mt-8 grid max-w-xl gap-4 sm:grid-cols-3"
+            className="mt-4 sm:mt-8 grid max-w-xl gap-2 sm:gap-4 grid-cols-2 sm:grid-cols-3"
           >
             {path.points.map((point, pointIndex) => (
               <motion.div
@@ -157,24 +148,24 @@ function CareerSlide({ path, index, scrollYProgress }) {
                 whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
                 transition={{ duration: 0.6, delay: pointIndex * 0.12, ease: "easeOut" }}
                 viewport={{ once: false, amount: 0.4 }}
-                className="rounded-2xl border border-glass-border bg-glass-surface/80 p-4 backdrop-blur-md"
+                className="rounded-xl sm:rounded-2xl border border-glass-border bg-glass-surface/80 p-3 sm:p-4 backdrop-blur-md"
               >
-                <CheckCircle2 className="mb-3 h-5 w-5 text-primary-text" />
-                <p className="text-sm font-bold text-foreground">{point}</p>
+                <CheckCircle2 className="mb-1.5 sm:mb-3 h-4 w-4 sm:h-5 sm:w-5 text-primary-text" />
+                <p className="text-xs sm:text-sm font-bold text-foreground">{point}</p>
               </motion.div>
             ))}
           </motion.div>
 
           <motion.div
             style={{ opacity: descriptionOpacity, y: descriptionY }}
-            className="mt-10 flex flex-wrap items-center gap-4"
+            className="mt-6 sm:mt-10 flex flex-wrap items-center gap-3 sm:gap-4"
           >
-            <button className="group inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 text-sm font-semibold text-primary-fg shadow-[0_0_20px_var(--primary-shadow)] transition-all duration-300 hover:scale-105 hover:bg-primary-hover">
+            <button className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 sm:px-8 sm:py-4 text-xs sm:text-sm font-semibold text-primary-fg shadow-[0_0_20px_var(--shadow-primary)] transition-all duration-300 hover:scale-105 hover:bg-primary-hover">
               View Courses
-              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </button>
 
-            <span className="text-sm font-semibold text-foreground">{path.cardName}</span>
+            <span className="text-xs sm:text-sm font-semibold text-foreground">{path.cardName}</span>
           </motion.div>
         </motion.div>
 
@@ -182,18 +173,18 @@ function CareerSlide({ path, index, scrollYProgress }) {
         <div className="order-1 flex justify-center lg:order-2 lg:justify-end">
           <motion.div
             style={{ x: imageX, scale: imageScale, rotateX: imageRotateX, rotateY: imageRotateY, rotateZ: imageRotateZ, transformPerspective: 1200, transformStyle: "preserve-3d" }}
-            className="relative aspect-[1.58] w-full rounded-[2.5rem]"
+            className="relative aspect-[1.8] sm:aspect-[1.58] w-full rounded-[1.5rem] sm:rounded-[2.5rem]"
           >
             <motion.div
               animate={{ y: [0, -10, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="relative h-full w-full overflow-hidden rounded-[2rem] shadow-xl dark:shadow-none"
+              className="relative h-full w-full overflow-hidden rounded-[1.5rem] sm:rounded-[2rem] shadow-xl dark:shadow-none"
             >
               <Image src={path.image} alt={path.cardName} fill className="object-cover" priority={index === 0} />
             </motion.div>
 
             <motion.div
               animate={{ opacity: [0.45, 1, 0.45], scale: [1, 1.06, 1] }} transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -right-4 -top-4 rounded-full bg-primary px-5 py-3 text-xs font-bold uppercase tracking-widest text-primary-fg shadow-[0_0_20px_var(--primary-shadow)]"
+              className="absolute -right-2 -top-2 sm:-right-4 sm:-top-4 rounded-full bg-primary px-4 py-2 sm:px-5 sm:py-3 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-primary-fg shadow-[0_0_20px_var(--shadow-primary)]"
             >
               {path.title}
             </motion.div>
@@ -208,11 +199,11 @@ function CareerProgress({ scrollYProgress }) {
   const progressHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <div className="absolute right-6 top-1/2 hidden h-64 -translate-y-1/2 lg:block">
+    <div className="absolute right-4 sm:right-6 top-1/2 hidden h-64 -translate-y-1/2 lg:block">
       <div className="relative h-full w-[3px] overflow-hidden rounded-full bg-border">
         <motion.div
           style={{ height: progressHeight }}
-          className="absolute left-0 top-0 w-full rounded-full bg-primary shadow-[0_0_10px_var(--primary-shadow)]"
+          className="absolute left-0 top-0 w-full rounded-full bg-primary shadow-[0_0_10px_var(--shadow-primary)]"
         />
       </div>
 
@@ -220,7 +211,7 @@ function CareerProgress({ scrollYProgress }) {
         {paths.map((item) => (
           <div
             key={item.cardName}
-            className="h-4 w-4 rounded-full border-2 border-section-bg bg-primary shadow-[0_0_10px_var(--primary-shadow)]"
+            className="h-4 w-4 rounded-full border-2 border-section-bg bg-primary shadow-[0_0_10px_var(--shadow-primary)]"
           />
         ))}
       </div>
@@ -235,27 +226,28 @@ function CareerPath() {
   const smoothScrollProgress = useSpring(scrollYProgress, { stiffness: 70, damping: 24, mass: 0.35 });
 
   return (
-    <section ref={sectionRef} className="relative mt-20 h-[720vh] bg-section-bg transition-colors duration-500">
-      <div className="sticky top-0 flex min-h-screen items-center overflow-hidden py-16">
+    <section ref={sectionRef} className="relative mt-12 sm:mt-20 h-[720vh] bg-section-bg transition-colors duration-500">
+      <div className="sticky top-0 flex min-h-screen items-center justify-center overflow-hidden py-8 sm:py-16">
         <FloatingBackground scrollYProgress={smoothScrollProgress} />
 
-        {/* Increased mobile height to prevent vertical clipping of text/images */}
-        <div className="container relative mx-auto h-[1050px] sm:h-[950px] lg:h-[800px] px-4 sm:px-6 lg:px-8">
+        {/* Dynamic height mapping fixes the vertical clipping on mobile */}
+        <div className="container relative mx-auto h-[88vh] min-h-[580px] max-h-[800px] px-4 sm:px-6 lg:px-8">
           
           <motion.div
             style={{ y: useTransform(smoothScrollProgress, [0, 1], [0, -120]), opacity: useTransform(smoothScrollProgress, [0, 0.12], [1, 0]) }}
-            className="absolute left-4 top-0 z-20 sm:left-6 lg:left-8"
+            className="absolute left-4 sm:left-6 lg:left-8 top-0 z-20"
           >
-            <div className="mb-3 flex items-center gap-2">
-              <span className="text-xs font-bold uppercase tracking-widest text-primary-text">Your Career Path</span>
-              <CheckCircle2 className="h-4 w-4 text-primary-text" />
+            <div className="mb-1 sm:mb-3 flex items-center gap-2">
+              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-primary-text">Your Career Path</span>
+              <CheckCircle2 className="h-3 sm:h-4 w-3 sm:w-4 text-primary-text" />
             </div>
-            <h2 className="text-3xl font-extrabold leading-tight text-foreground sm:text-6xl">
+            <h2 className="text-2xl sm:text-4xl lg:text-6xl font-extrabold leading-tight text-foreground">
               One Path. Many Opportunities.
             </h2>
           </motion.div>
 
-          <div className="relative h-full pt-28" style={{ perspective: "1400px", transformStyle: "preserve-3d" }}>
+          {/* Adjusted padding top so content clears the header correctly on small screens */}
+          <div className="relative h-full pt-16 sm:pt-24 lg:pt-28" style={{ perspective: "1400px", transformStyle: "preserve-3d" }}>
             {paths.map((path, index) => (
               <CareerSlide key={path.cardName} path={path} index={index} scrollYProgress={smoothScrollProgress} />
             ))}

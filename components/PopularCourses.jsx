@@ -106,7 +106,7 @@ export default function PopularCourses() {
           return (
             <div 
               key={course.title}
-              className="sticky w-full flex flex-col lg:flex-row bg-surface border border-border shadow-stack rounded-[2rem] md:rounded-[3rem] overflow-hidden group"
+              className="sticky w-full flex flex-col lg:flex-row bg-background border border-border shadow-stack rounded-[2rem] md:rounded-[3rem] overflow-hidden group"
               style={{ 
                 top: `calc(10vh + ${index * 40}px)`, 
                 height: 'auto',
