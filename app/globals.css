@@ -1,39 +1,374 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f8faf8;
-  --foreground: #1f1f1f;
+  /* Core UI Colors */
+  --background: #ffffff;
+  --foreground: #0f172a;       /* slate-900 */
+  --surface: #f8fafc;          /* slate-50 */
+  --border: #e2e8f0;           /* slate-200 */
+  --muted: #64748b;            /* slate-500 */
 
   /* Brand Green Theme */
-  --primary: #95c11f;
-  /* main green */
-  --secondary: #2f2f31;
-  /* dark forest green */
-  --accent: #b7de39;
-  /* soft bright green */
-  --normal: #f3f8e8;
-  /* soft green background */
-  --surface: #ffffff;
-  /* light green bg */
-  --border: #d1fae5;
-  --muted: #6b7280;
+  --primary: #95c11f;          /* main green bg */
+  --primary-text: #65a30d;     /* lime-600 for text */
+  --secondary: #2f2f31;        /* dark forest green */
+  --accent: #b7de39;           /* soft bright green */
+  --normal: #f3f8e8;           /* soft green background */
 
-  /* Font */
+  /* Body Gradients */
+  --body-start: #ffffff;
+  --body-mid: #f7faf7;
+  --body-end: #eefbf2;
+
   --font-sans: var(--font-albert-sans);
+
+  /* Hero Section & Glass UI */
+  --hero-bg: #f9fdf2;          /* Pinch of light lime */
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-border: var(--border);
+  
+  /* Interactive SVG Nodes & Grids */
+  --spotlight-center: rgba(0, 0, 0, 0.03);
+  --spotlight-edge: rgba(163, 230, 53, 0.05);
+  --node-static: rgba(0, 0, 0, 0.08);
+  --node-active: rgba(132, 204, 22, 0.5);
+  
+  /* React Select Interactions */
+  --primary-shadow: rgba(132, 204, 22, 0.15);
+  --primary-light: linear-gradient(135deg, rgba(132,204,22,0.1), rgba(255,255,255,0.5));
+
+  --card-emerald-text: #059669;    /* emerald-600 */
+  --card-emerald-bg: rgba(16, 185, 129, 0.15);
+  
+  --card-blue-text: #2563eb;       /* blue-600 */
+  --card-blue-bg: rgba(59, 130, 246, 0.15);
+  
+  --card-indigo-text: #4f46e5;     /* indigo-600 */
+  --card-indigo-bg: rgba(99, 102, 241, 0.15);
+  
+  --card-amber-text: #f59e0b;      /* amber-500 */
+  --card-amber-bg: rgba(245, 158, 11, 0.15);
+
+  --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+
+  --section-bg: rgba(243, 248, 232, 0.6); /* lime-50/60 */
+  --glow-primary: rgba(132, 204, 22, 0.15);
+  --glow-secondary: rgba(6, 182, 212, 0.1);
+  
+  /* Interactive Element States */
+  --primary-hover: #65a30d;      /* lime-600 */
+  --primary-fg: #ffffff;         /* Text color inside primary buttons */
+  
+  /* Glass Surfaces */
+  --glass-surface: rgba(255, 255, 255, 0.8);
+
+  /* NVQ Trades Section */
+  --nvq-bg: rgba(247, 254, 231, 0.5); /* lime-50 at 50% opacity */
+  --nvq-radial: rgba(132, 204, 22, 0.05);
+  
+  /* NVQ Animations & SVG Nodes */
+  --nvq-border-base: rgba(0, 0, 0, 0.05);
+  --nvq-border-active: rgba(132, 204, 22, 0.7);
+  --nvq-glow-shadow: 0 0 20px rgba(132, 204, 22, 0.4);
+  --nvq-center-shadow: 0 0 45px rgba(132, 204, 22, 0.3);
+  
+  --nvq-svg-color: rgb(132, 204, 22);
+  --nvq-svg-faint: rgba(132, 204, 22, 0.15);
+  --nvq-svg-shadow: drop-shadow(0 0 8px rgb(132, 204, 22));
+
+  /* How It Works Section */
+  --hiw-bg: rgba(247, 254, 231, 0.5); /* lime-50/50 */
+  --hiw-glass: rgba(255, 255, 255, 0.6);
+  --hiw-glass-solid: rgba(255, 255, 255, 0.9);
+  
+  /* Completed Step States */
+  --hiw-done-bg: rgba(16, 185, 129, 0.05);
+  --hiw-done-border: rgba(16, 185, 129, 0.2);
+  --hiw-done-text: #059669; /* emerald-600 */
+  
+  /* 3D Shadows */
+  --hiw-shadow-main: 0 25px 50px -12px rgba(0, 0, 0, 0.05);
+  --hiw-shadow-card: 0 20px 40px -10px rgba(0, 0, 0, 0.05);
+  
+  /* Interactive Gradients & Masks */
+  --hiw-gradient-1: rgba(132, 204, 22, 0.06);
+  --hiw-gradient-2: rgba(6, 182, 212, 0.05);
+  --hiw-gradient-3: rgba(16, 185, 129, 0.05);
+  --hiw-mask: radial-gradient(circle at center, transparent 0%, rgba(247, 254, 231, 0.8) 100%);
+
+  /* Logos & Trusted Network Section */
+  --logo-bg: #f8fafc; /* slate-50 */
+  --logo-glass: rgba(255, 255, 255, 0.9);
+  --logo-card-bg: #ffffff;
+  --logo-card-hover: #f1f5f9; /* gray-50 */
+  
+  /* Interactive Radial Glows */
+  --logo-glow-1: rgba(132, 204, 22, 0.06);
+  --logo-glow-2: rgba(34, 211, 238, 0.04);
+  --logo-glow-3: rgba(16, 185, 129, 0.03);
+  
+  /* Grid & Masks */
+  --logo-grid: rgba(226, 232, 240, 1); /* slate-200 */
+  --logo-mask: radial-gradient(circle at center, transparent 0%, rgba(248, 250, 252, 0.5) 74%);
+  
+  /* 3D Node & Modal Shadows */
+  --logo-shadow-node: 0 24px 80px rgba(0, 0, 0, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  --logo-shadow-modal: 0 40px 140px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+  /* Stats CTA Section */
+  --stats-bg: rgba(247, 254, 231, 0.5); /* lime-50/50 */
+  --stats-blob-1: rgba(255, 255, 255, 0.6);
+  --stats-blob-2: rgba(132, 204, 22, 0.1);
+  
+  --stats-card-bg: rgba(255, 255, 255, 0.6);
+  --stats-card-hover: rgba(255, 255, 255, 0.8);
+  --stats-border: var(--border);
+  --stats-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  
+  --stats-accent-base: rgba(132, 204, 22, 0.3);
+  --stats-accent-hover: #84cc16; /* lime-500 */
+  
+  --stats-video-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --stats-video-overlay: rgba(0, 0, 0, 0.1);
+
+  /* Footer Section */
+  --footer-bg: rgba(247, 254, 231, 0.5); /* lime-50/50 */
+  --footer-border: var(--border);
+  
+  --footer-social-border: #e2e8f0;
+  --footer-social-hover-bg: #f7fee7; /* lime-50 */
+  --footer-social-hover-border: #84cc16; /* lime-500 */
+  
+  --footer-text: #475569; /* slate-600 */
+  --footer-heading: #0f172a; /* slate-900 */
+  --footer-hover: #65a30d; /* lime-600 */
+  --footer-bottom-text: #64748b; /* slate-500 */
+  --footer-bottom-hover: #334155; /* slate-700 */
+
+  --shadow-stack: 0 -10px 40px rgba(0, 0, 0, 0.05);
+}
+
+.dark {
+  /* Core UI Colors - Dark Mode */
+  --background: #070707;
+  --foreground: #ffffff;
+  --surface: rgba(255, 255, 255, 0.04);
+  --border: rgba(255, 255, 255, 0.1);
+  --muted: rgba(255, 255, 255, 0.6);
+
+  /* Brand Green Theme - Dark Mode */
+  --primary: #a3e635;          /* lime-400 */
+  --primary-text: #a3e635;     /* lime-400 */
+  --secondary: #f8faf8;
+  --accent: #d9f99d;
+  --normal: rgba(255, 255, 255, 0.02);
+
+  /* Body Gradients - Dark Mode */
+  --body-start: #000000;
+  --body-mid: #050505;
+  --body-end: #0a0a0a;
+
+  /* Hero Section & Glass UI */
+  --hero-bg: #060902;          /* Very dark lime-tinted black */
+  --glass-bg: rgba(0, 0, 0, 0.6);
+  --glass-border: rgba(163, 230, 53, 0.35);
+  
+  /* Interactive SVG Nodes & Grids */
+  --spotlight-center: rgba(255, 255, 255, 0.11);
+  --spotlight-edge: rgba(163, 230, 53, 0.07);
+  --node-static: rgba(255, 255, 255, 0.12);
+  --node-active: rgba(163, 230, 53, 0.42);
+  
+  /* React Select Interactions */
+  --primary-shadow: rgba(163, 230, 53, 0.2);
+  --primary-light: linear-gradient(135deg, rgba(163,230,53,0.18), rgba(255,255,255,0.07));
+
+  --card-emerald-text: #34d399;    /* emerald-400 */
+  --card-emerald-bg: rgba(16, 185, 129, 0.2);
+  
+  --card-blue-text: #60a5fa;       /* blue-400 */
+  --card-blue-bg: rgba(59, 130, 246, 0.2);
+  
+  --card-indigo-text: #818cf8;     /* indigo-400 */
+  --card-indigo-bg: rgba(99, 102, 241, 0.2);
+  
+  --card-amber-text: #fbbf24;      /* amber-400 */
+  --card-amber-bg: rgba(245, 158, 11, 0.2);
+
+  --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+
+  /* Section Backgrounds & Glows - Dark */
+  --section-bg: #020202;
+  --glow-primary: rgba(132, 204, 22, 0.06);
+  --glow-secondary: rgba(6, 182, 212, 0.04);
+  
+  /* Interactive Element States - Dark */
+  --primary-hover: #d9f99d;      /* lime-300 */
+  --primary-fg: #000000;
+  
+  /* Glass Surfaces - Dark */
+  --glass-surface: rgba(255, 255, 255, 0.06);
+
+  /* NVQ Trades Section - Dark */
+  --nvq-bg: #000000;
+  --nvq-radial: rgba(132, 204, 22, 0.08);
+  
+  /* NVQ Animations & SVG Nodes - Dark */
+  --nvq-border-base: rgba(255, 255, 255, 0.1);
+  --nvq-border-active: rgba(163, 230, 53, 0.9);
+  --nvq-glow-shadow: 0 0 30px rgba(163, 230, 53, 0.8);
+  --nvq-center-shadow: 0 0 55px rgba(163, 230, 53, 0.5);
+  
+  --nvq-svg-color: rgb(163, 230, 53);
+  --nvq-svg-faint: rgba(163, 230, 53, 0.13);
+  --nvq-svg-shadow: drop-shadow(0 0 10px rgb(163, 230, 53));
+
+  /* How It Works Section - Dark */
+  --hiw-bg: #020402;
+  --hiw-glass: rgba(255, 255, 255, 0.035);
+  --hiw-glass-solid: rgba(7, 10, 7, 0.9); 
+  
+  /* Completed Step States - Dark */
+  --hiw-done-bg: rgba(110, 231, 183, 0.055);
+  --hiw-done-border: rgba(110, 231, 183, 0.2);
+  --hiw-done-text: #a7f3d0; /* emerald-200 */
+  
+  /* 3D Shadows - Dark */
+  --hiw-shadow-main: 0 35px 130px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.1);
+  --hiw-shadow-card: 0 35px 120px rgba(0,0,0,0.52), inset 0 1px 0 rgba(255,255,255,0.12);
+  
+  /* Interactive Gradients & Masks - Dark */
+  --hiw-gradient-1: rgba(163, 230, 53, 0.14);
+  --hiw-gradient-2: rgba(34, 211, 238, 0.08);
+  --hiw-gradient-3: rgba(16, 185, 129, 0.1);
+  --hiw-mask: radial-gradient(circle at center, transparent 0%, #020402 78%);
+
+  /* Logos & Trusted Network Section - Dark */
+  --logo-bg: #020402;
+  --logo-glass: rgba(10, 10, 10, 0.75);
+  --logo-card-bg: rgba(20, 20, 20, 0.6);
+  --logo-card-hover: rgba(30, 30, 30, 0.8);
+  
+  /* Interactive Radial Glows - Dark */
+  --logo-glow-1: rgba(163, 230, 53, 0.12);
+  --logo-glow-2: rgba(34, 211, 238, 0.08);
+  --logo-glow-3: rgba(16, 185, 129, 0.06);
+  
+  /* Grid & Masks - Dark */
+  --logo-grid: rgba(255, 255, 255, 0.05);
+  --logo-mask: radial-gradient(circle at center, transparent 0%, #020402 74%);
+  
+  /* 3D Node & Modal Shadows - Dark */
+  --logo-shadow-node: 0 24px 80px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  --logo-shadow-modal: 0 40px 140px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+  /* Stats CTA Section - Dark */
+  --stats-bg: #020202;
+  --stats-blob-1: rgba(255, 255, 255, 0.035);
+  --stats-blob-2: rgba(163, 230, 53, 0.04);
+  
+  --stats-card-bg: rgba(255, 255, 255, 0.035);
+  --stats-card-hover: rgba(255, 255, 255, 0.06);
+  --stats-border: rgba(255, 255, 255, 0.07);
+  --stats-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  
+  --stats-accent-base: rgba(163, 230, 53, 0.45);
+  --stats-accent-hover: #a3e635; /* lime-400 */
+  
+  --stats-video-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  --stats-video-overlay: rgba(0, 0, 0, 0.3);
+
+  /* Footer Section - Dark */
+  --footer-bg: #020202;
+  --footer-border: rgba(255, 255, 255, 0.1);
+  
+  --footer-social-border: rgba(255, 255, 255, 0.1);
+  --footer-social-hover-bg: rgba(255, 255, 255, 0.04);
+  --footer-social-hover-border: #a3e635; /* lime-400 */
+  
+  --footer-text: rgba(255, 255, 255, 0.6);
+  --footer-heading: #ffffff;
+  --footer-hover: #a3e635; /* lime-400 */
+  --footer-bottom-text: rgba(255, 255, 255, 0.5);
+  --footer-bottom-hover: rgba(255, 255, 255, 0.8);
+
+  --shadow-stack: 0 -8px 20px rgba(0, 0, 0, 0.15);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  
   --color-primary: var(--primary);
+  --color-primary-text: var(--primary-text);
   --color-secondary: var(--secondary);
   --color-accent: var(--accent);
   --color-normal: var(--normal);
-  --color-border: var(--border);
-  --color-muted: var(--muted);
 
-  --font-sans: var(--font-albert-sans);
+  --color-hero-bg: var(--hero-bg);
+  --color-glass-bg: var(--glass-bg);
+  --color-glass-border: var(--glass-border);
+
+  --color-section-bg: var(--section-bg);
+  --color-glow-primary: var(--glow-primary);
+  --color-glow-secondary: var(--glow-secondary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-fg: var(--primary-fg);
+  --color-glass-surface: var(--glass-surface);
+
+  --color-nvq-bg: var(--nvq-bg);
+  --shadow-nvq-center: var(--nvq-center-shadow);
+
+  --font-sans: var(--font-sans);
+
+  --color-hiw-bg: var(--hiw-bg);
+  --color-hiw-glass: var(--hiw-glass);
+  --color-hiw-glass-solid: var(--hiw-glass-solid);
+  
+  --color-hiw-done-bg: var(--hiw-done-bg);
+  --color-hiw-done-border: var(--hiw-done-border);
+  --color-hiw-done-text: var(--hiw-done-text);
+  
+  --shadow-hiw-main: var(--hiw-shadow-main);
+  --shadow-hiw-card: var(--hiw-shadow-card);
+
+  --color-logo-bg: var(--logo-bg);
+  --color-logo-glass: var(--logo-glass);
+  --color-logo-card-bg: var(--logo-card-bg);
+  --color-logo-card-hover: var(--logo-card-hover);
+  --color-logo-grid: var(--logo-grid);
+  
+  --shadow-logo-node: var(--logo-shadow-node);
+  --shadow-logo-modal: var(--logo-shadow-modal);
+
+  --color-stats-bg: var(--stats-bg);
+  --color-stats-blob-1: var(--stats-blob-1);
+  --color-stats-blob-2: var(--stats-blob-2);
+  --color-stats-card-bg: var(--stats-card-bg);
+  --color-stats-card-hover: var(--stats-card-hover);
+  --color-stats-border: var(--stats-border);
+  --color-stats-accent-base: var(--stats-accent-base);
+  --color-stats-accent-hover: var(--stats-accent-hover);
+  --color-stats-video-overlay: var(--stats-video-overlay);
+  
+  --shadow-stats-card: var(--stats-shadow);
+  --shadow-stats-video: var(--stats-video-shadow);
+
+  --color-footer-bg: var(--footer-bg);
+  --color-footer-border: var(--footer-border);
+  --color-footer-social-border: var(--footer-social-border);
+  --color-footer-social-hover-bg: var(--footer-social-hover-bg);
+  --color-footer-social-hover-border: var(--footer-social-hover-border);
+  --color-footer-text: var(--footer-text);
+  --color-footer-heading: var(--footer-heading);
+  --color-footer-hover: var(--footer-hover);
+  --color-footer-bottom-text: var(--footer-bottom-text);
+  --color-footer-bottom-hover: var(--footer-bottom-hover);
+
+  --shadow-stack: var(--shadow-stack);
 }
 
 html {
@@ -41,12 +376,9 @@ html {
 }
 
 body {
-  background: linear-gradient(180deg,
-      #ffffff 0%,
-      #f7faf7 40%,
-      #eefbf2 100%);
-  color: var(--foreground);
-  font-family: var(--font-albert-sans), "Inter", Arial, Helvetica, sans-serif;
+  background: linear-gradient(180deg, var(--body-start) 0%, var(--body-mid) 40%, var(--body-end) 100%);
+  color: var(--color-foreground);
+  font-family: var(--font-sans), "Inter", Arial, Helvetica, sans-serif;
   font-weight: 400;
   letter-spacing: 0;
   text-transform: uppercase;

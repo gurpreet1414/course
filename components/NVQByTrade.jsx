@@ -3,18 +3,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import {
-  Hammer,
-  Cuboid,
-  PaintRoller,
-  Shovel,
-  Home,
-  Grid3X3,
-  Zap,
-  LayoutGrid,
-  ShieldCheck,
-  Clock3,
-  MousePointerClick,
-  RefreshCw,
+  Hammer, Cuboid, PaintRoller, Shovel, Home, Grid3X3, Zap, 
+  LayoutGrid, ShieldCheck, Clock3, MousePointerClick, RefreshCw,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -51,18 +41,20 @@ const dotPositions = [65, 195, 325, 455, 575, 705, 835, 945];
 
 export default function NVQByTrade() {
   return (
-    <section className="relative overflow-hidden bg-black py-24 text-white">
+    <section className="relative overflow-hidden bg-nvq-bg py-24 text-foreground transition-colors duration-500">
+      
       {/* Background glow */}
-      <div className="absolute left-1/2 top-[48%] h-72 w-72 -translate-x-1/2 rounded-full bg-lime-400/10 blur-3xl" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(132,204,22,0.08),transparent_45%)]" />
+      <div className="absolute left-1/2 top-[48%] h-72 w-72 -translate-x-1/2 rounded-full bg-glow-primary blur-3xl" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--nvq-radial),transparent_45%)]" />
 
       <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
+        
         {/* Label */}
         <motion.div
           initial={{ opacity: 0, y: -8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mx-auto mb-5 flex w-fit items-center gap-2 rounded-full border border-lime-400/20 bg-lime-400/10 px-4 py-1 text-xs font-semibold uppercase tracking-wide text-lime-400"
+          className="mx-auto mb-5 flex w-fit items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1 text-xs font-semibold uppercase tracking-wide text-primary-text"
         >
           <Zap className="h-3.5 w-3.5" />
           NVQ Trades
@@ -74,7 +66,7 @@ export default function NVQByTrade() {
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl"
+            className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-6xl"
           >
             Choose your NVQ trade
           </motion.h2>
@@ -84,15 +76,16 @@ export default function NVQByTrade() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="mt-4 text-base text-white sm:text-lg"
+            className="mt-4 text-base text-muted sm:text-lg"
           >
             One platform, multiple construction qualifications. Start with your
             trade and connect directly to the right NVQ route.
           </motion.p>
         </div>
 
-        {/* Visual */}
-        <div className="relative mx-auto h-[470px] max-w-5xl">
+        {/* Visual Container (Height un-constrained on mobile to prevent squishing) */}
+        <div className="relative mx-auto h-auto pb-10 sm:h-[470px] sm:pb-0 max-w-5xl">
+          
           {/* Trade icons row */}
           <div className="relative z-20 grid grid-cols-4 gap-4 sm:grid-cols-8">
             {trades.map((trade, index) => (
@@ -107,153 +100,99 @@ export default function NVQByTrade() {
                 <motion.div
                   animate={{
                     boxShadow: [
-                      "0 0 0 rgba(163,230,53,0)",
-                      "0 0 0 rgba(163,230,53,0)",
-                      "0 0 30px rgba(163,230,53,0.8)",
-                      "0 0 0 rgba(163,230,53,0)",
+                      "0 0 0 transparent",
+                      "0 0 0 transparent",
+                      "var(--nvq-glow-shadow)",
+                      "0 0 0 transparent",
                     ],
                     borderColor: [
-                      "rgba(255,255,255,0.1)",
-                      "rgba(255,255,255,0.1)",
-                      "rgba(163,230,53,0.9)",
-                      "rgba(255,255,255,0.1)",
+                      "var(--nvq-border-base)",
+                      "var(--nvq-border-base)",
+                      "var(--nvq-border-active)",
+                      "var(--nvq-border-base)",
                     ],
                   }}
-                  transition={{
-                    duration: 6,
-                    delay: index * 0.32,
-                    repeat: Infinity,
-                    repeatDelay: 0,
-                    ease: "easeInOut",
-                  }}
-                  className="rounded-xl"
+                  transition={{ duration: 6, delay: index * 0.32, repeat: Infinity, ease: "easeInOut" }}
+                  className="rounded-xl border bg-transparent"
                 >
                   <Link
                     href="#"
-                    className="flex h-14 w-14 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] shadow-lg shadow-black/30 transition-all hover:border-lime-400/70 hover:bg-lime-400/10"
+                    className="flex h-14 w-14 items-center justify-center rounded-xl border border-transparent bg-surface transition-all hover:border-primary/70 hover:bg-primary/10 shadow-sm"
                   >
-                    <trade.icon className="h-6 w-6 text-white transition-colors group-hover:text-lime-400" />
+                    <trade.icon className="h-6 w-6 text-muted transition-colors group-hover:text-primary-text" />
                   </Link>
                 </motion.div>
 
-                <span className="hidden text-center text-xs font-semibold text-white group-hover:text-lime-400 sm:block">
+                <span className="hidden text-center text-xs font-semibold text-foreground transition-colors group-hover:text-primary-text sm:block">
                   {trade.title}
                 </span>
               </motion.div>
             ))}
           </div>
 
-          {/* SVG dots + autoplay connecting lines */}
+          {/* SVG dots + autoplay connecting lines (Hidden on Mobile) */}
           <svg
-            className="pointer-events-none absolute inset-x-0 top-[118px] z-10 h-[270px] w-full"
+            className="pointer-events-none absolute inset-x-0 top-[118px] z-10 hidden h-[270px] w-full sm:block"
             viewBox="0 0 1000 270"
             fill="none"
             preserveAspectRatio="none"
           >
-            {/* top dots - dots are now inside SVG so lines connect perfectly */}
+            {/* Top dots */}
             {dotPositions.map((x, index) => (
               <motion.circle
                 key={`dot-${index}`}
                 cx={x}
                 cy="12"
                 r="4"
-                fill="rgb(163 230 53)"
-                animate={{
-                  scale: [1, 1, 1.8, 1],
-                  opacity: [0.55, 0.55, 1, 0.75],
-                }}
-                transition={{
-                  duration: 6,
-                  delay: index * 0.32,
-                  repeat: Infinity,
-                  repeatDelay: 0,
-                  ease: "easeInOut",
-                }}
-                style={{
-                  filter: "drop-shadow(0 0 10px rgb(163 230 53))",
-                  transformOrigin: `${x}px 12px`,
-                }}
+                fill="var(--nvq-svg-color)"
+                animate={{ scale: [1, 1, 1.8, 1], opacity: [0.55, 0.55, 1, 0.75] }}
+                transition={{ duration: 6, delay: index * 0.32, repeat: Infinity, ease: "easeInOut" }}
+                style={{ filter: "var(--nvq-svg-shadow)", transformOrigin: `${x}px 12px` }}
               />
             ))}
 
-
-
             {linePaths.map((d, index) => (
               <g key={index}>
-                {/* faint always-visible base line */}
-                {/* faint always-visible base line */}
-                <path
-                  d={d}
-                  stroke="rgba(163,230,53,0.13)"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                />
+                {/* Faint always-visible base line */}
+                <path d={d} stroke="var(--nvq-svg-faint)" strokeWidth="1.8" strokeLinecap="round" />
 
-                {/* autoplay drawing line */}
+                {/* Autoplay drawing line */}
                 <motion.path
                   d={d}
-                  stroke="rgb(163 230 53)"
+                  stroke="var(--nvq-svg-color)"
                   strokeWidth="2.2"
                   strokeLinecap="round"
                   initial={{ pathLength: 0, opacity: 0 }}
-                  animate={{
-                    pathLength: [0, 1, 1, 0],
-                    opacity: [0, 1, 1, 0],
-                  }}
-                  transition={{
-                    duration: 6,
-                    delay: index * 0.32,
-                    repeat: Infinity,
-                    repeatDelay: 0,
-                    ease: "easeInOut",
-                  }}
+                  animate={{ pathLength: [0, 1, 1, 0], opacity: [0, 1, 1, 0] }}
+                  transition={{ duration: 6, delay: index * 0.32, repeat: Infinity, ease: "easeInOut" }}
                 />
 
-                {/* moving energy particle */}
+                {/* Moving energy particle */}
                 <motion.circle
                   r="4"
-                  fill="rgb(163 230 53)"
+                  fill="var(--nvq-svg-color)"
                   initial={{ opacity: 0 }}
-                  animate={{
-                    opacity: [0, 1, 1, 0],
-                    offsetDistance: ["0%", "100%", "100%", "100%"],
-                  }}
-                  transition={{
-                    duration: 6,
-                    delay: index * 0.32,
-                    repeat: Infinity,
-                    repeatDelay: 0,
-                    ease: "easeInOut",
-                  }}
-                  style={{
-                    offsetPath: `path("${d}")`,
-                    filter: "drop-shadow(0 0 10px rgb(163 230 53))",
-                  }}
+                  animate={{ opacity: [0, 1, 1, 0], offsetDistance: ["0%", "100%", "100%", "100%"] }}
+                  transition={{ duration: 6, delay: index * 0.32, repeat: Infinity, ease: "easeInOut" }}
+                  style={{ offsetPath: `path("${d}")`, filter: "var(--nvq-svg-shadow)" }}
                 />
               </g>
             ))}
           </svg>
 
-          {/* Center glowing icon */}
+          {/* Center glowing icon (Hidden on Mobile) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.6 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.6 }}
             transition={{ duration: 0.5 }}
-            className="absolute left-1/2 top-[315px] z-30 flex h-16 w-16 -translate-x-1/2 items-center justify-center rounded-2xl border border-lime-400/30 bg-lime-400/10 shadow-[0_0_55px_rgba(132,204,22,0.8)]"
+            className="absolute left-1/2 top-[315px] z-30 hidden h-16 w-16 -translate-x-1/2 items-center justify-center rounded-2xl border border-primary/30 bg-primary/10 shadow-nvq-center sm:flex"
           >
             <motion.div
-              animate={{
-                scale: [1, 1.15, 1],
-                opacity: [1, 0.85, 1],
-              }}
-              transition={{
-                duration: 1.8,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
+              animate={{ scale: [1, 1.15, 1], opacity: [1, 0.85, 1] }}
+              transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
             >
-              <Zap className="h-8 w-8 text-lime-400" />
+              <Zap className="h-8 w-8 text-primary-text" />
             </motion.div>
           </motion.div>
         </div>
@@ -266,30 +205,19 @@ export default function NVQByTrade() {
               initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{
-                delay: 0.2 + index * 0.15,
-                duration: 0.45,
-              }}
+              transition={{ delay: 0.2 + index * 0.15, duration: 0.45 }}
               className="flex items-center gap-3"
             >
-              <feature.icon className="h-5 w-5 text-lime-400" />
-
-              <span className="whitespace-nowrap text-sm font-bold">
+              <feature.icon className="h-5 w-5 text-primary-text" />
+              <span className="whitespace-nowrap text-sm font-bold text-foreground">
                 {feature.title}
               </span>
 
+              {/* Dashed line hidden on mobile for a cleaner stacked list */}
               <motion.span
-                animate={{
-                  scaleX: [0, 1, 1, 0],
-                  opacity: [0, 1, 1, 0],
-                }}
-                transition={{
-                  duration: 4,
-                  delay: index * 0.4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="h-px flex-1 origin-left border-t border-dashed border-lime-400/30"
+                animate={{ scaleX: [0, 1, 1, 0], opacity: [0, 1, 1, 0] }}
+                transition={{ duration: 4, delay: index * 0.4, repeat: Infinity, ease: "easeInOut" }}
+                className="hidden h-px flex-1 origin-left border-t border-dashed border-primary/30 sm:block"
               />
             </motion.div>
           ))}

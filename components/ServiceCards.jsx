@@ -10,36 +10,36 @@ const services = [
     title: "Book a Course",
     description: "CITB, NEBOSH, IOSH, First Aid & more",
     icon: GraduationCap,
-    color: "text-emerald-400",
-    glow: "bg-emerald-500/20",
+    color: "text-[var(--card-emerald-text)]",
+    glow: "bg-[var(--card-emerald-bg)]",
   },
   {
     title: "Get an NVQ",
     description: "Get qualified with NVQ by trade",
     icon: FileText,
-    color: "text-blue-400",
-    glow: "bg-blue-500/20",
+    color: "text-[var(--card-blue-text)]",
+    glow: "bg-[var(--card-blue-bg)]",
   },
   {
     title: "Apply for CSCS",
     description: "Apply for your CSCS or CPCS card",
     icon: CreditCard,
-    color: "text-indigo-400",
-    glow: "bg-indigo-500/20",
+    color: "text-[var(--card-indigo-text)]",
+    glow: "bg-[var(--card-indigo-bg)]",
   },
   {
     title: "Upgrade Your Level",
     description: "Move to the next level and boost your career",
     icon: TrendingUp,
-    color: "text-amber-400",
-    glow: "bg-amber-500/20",
+    color: "text-[var(--card-amber-text)]",
+    glow: "bg-[var(--card-amber-bg)]",
   }
 ];
 
 function ServiceCards() {
   return (
-    <section className="container mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+    <section className="container relative z-20 mx-auto -mt-6 px-4 sm:-mt-10 sm:px-6 lg:-mt-12 lg:px-8">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 sm:gap-6">
         {services.map((service, index) => (
           <motion.div
             key={index}
@@ -48,23 +48,28 @@ function ServiceCards() {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
             whileHover={{ y: -5 }}
-            className="group relative overflow-hidden rounded-2xl p-6 flex flex-col justify-between bg-white/[0.03] backdrop-blur-xl border border-lime-400/30 hover:bg-white/[0.06] shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-all duration-500 cursor-pointer"
+            style={{ boxShadow: 'var(--card-shadow)' }}
+            className="group relative flex cursor-pointer flex-col justify-between overflow-hidden rounded-2xl border border-glass-border bg-glass-bg p-5 sm:p-6 backdrop-blur-xl transition-all duration-500 hover:border-primary/40 hover:bg-surface"
           >
             {/* Glow effect */}
-            <div className={`absolute -right-10 -top-10 h-28 w-28 rounded-full ${service.glow} blur-3xl opacity-0 transition duration-500 group-hover:opacity-100`} />
+            <div className={`absolute -right-10 -top-10 h-28 w-28 rounded-full ${service.glow} opacity-0 blur-3xl transition duration-500 group-hover:opacity-100`} />
 
-            <div className="relative flex gap-4 items-start">
-              <div className={`p-3 rounded-xl border border-white/10 bg-white/[0.05] ${service.color}`}>
-                <service.icon className="w-6 h-6" />
+            <div className="relative flex items-start gap-4">
+              <div className={`rounded-xl border border-border bg-background p-3 shadow-sm ${service.color}`}>
+                <service.icon className="h-6 w-6" />
               </div>
-              <div className="flex flex-col mt-1">
-                <h3 className="text-lg font-bold text-white mb-1 group-hover:text-lime-400 transition-colors">{service.title}</h3>
-                <p className="text-sm text-white font-medium line-clamp-2">{service.description}</p>
+              <div className="mt-1 flex flex-col">
+                <h3 className="mb-1 text-lg font-bold text-foreground transition-colors group-hover:text-primary-text">
+                  {service.title}
+                </h3>
+                <p className="line-clamp-2 text-sm font-medium text-muted">
+                  {service.description}
+                </p>
               </div>
             </div>
             
-            <div className="flex justify-end mt-4">
-              <ArrowRight className="w-5 h-5 text-white group-hover:text-lime-400 group-hover:translate-x-1 transition-all" />
+            <div className="mt-4 flex justify-end">
+              <ArrowRight className="h-5 w-5 text-muted transition-all group-hover:translate-x-1 group-hover:text-primary-text" />
             </div>
           </motion.div>
         ))}

@@ -12,62 +12,54 @@ const stats = [
 
 function StatsCTA() {
   return (
-    <section className="py-24 bg-[#020202] relative overflow-hidden">
-      {/* Soft Background Elements - No Gradient */}
-      <div className="absolute top-10 left-10 w-72 h-72 bg-white/[0.035] rounded-full blur-3xl"></div>
-      <div className="absolute bottom-10 right-10 w-80 h-80 bg-lime-400/[0.04] rounded-full blur-3xl"></div>
+    <section className="relative overflow-hidden bg-stats-bg py-20 sm:py-24 transition-colors duration-500">
+      {/* Soft Background Elements */}
+      <div className="absolute left-10 top-10 h-72 w-72 rounded-full bg-stats-blob-1 blur-3xl" />
+      <div className="absolute bottom-10 right-10 h-80 w-80 rounded-full bg-stats-blob-2 blur-3xl" />
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Heading */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="max-w-3xl mb-14"
+          className="mb-10 sm:mb-14 max-w-3xl"
         >
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.08]">
+          <h2 className="text-4xl font-extrabold leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             Trusted Construction Training, Proven Results
           </h2>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid items-center gap-10 sm:gap-12 lg:grid-cols-2">
           {/* Left Side Stats */}
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-2 gap-3 sm:gap-6">
             {stats.map((stat, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.4 }}
-                transition={{
-                  duration: 0.5,
-                  delay: index * 0.08,
-                  ease: "easeOut",
-                }}
+                transition={{ duration: 0.5, delay: index * 0.08, ease: "easeOut" }}
                 whileHover={{ y: -6 }}
-                className="group bg-white/[0.035] backdrop-blur-xl border border-white/[0.07] rounded-3xl p-8 hover:border-lime-400/30 hover:bg-white/[0.06] shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-all duration-500"
+                className="group rounded-2xl sm:rounded-3xl border border-stats-border bg-stats-card-bg p-5 sm:p-8 shadow-stats-card backdrop-blur-xl transition-all duration-500 hover:border-primary/30 hover:bg-stats-card-hover"
               >
                 <motion.span
                   initial={{ opacity: 0, y: 12 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{
-                    duration: 0.45,
-                    delay: 0.15 + index * 0.08,
-                    ease: "easeOut",
-                  }}
-                  className="text-4xl sm:text-5xl font-extrabold text-lime-300 tracking-tight block mb-2"
+                  transition={{ duration: 0.45, delay: 0.15 + index * 0.08, ease: "easeOut" }}
+                  className="mb-1 sm:mb-2 block text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-primary-text"
                 >
                   {stat.value}
                 </motion.span>
 
-                <span className="text-sm font-semibold text-white tracking-wide">
+                <span className="text-xs sm:text-sm font-semibold tracking-wide text-foreground">
                   {stat.label}
                 </span>
 
                 {/* Accent Line */}
-                <div className="mt-5 h-1 w-10 bg-lime-300/45 rounded-full group-hover:w-16 group-hover:bg-lime-300 transition-all duration-300"></div>
+                <div className="mt-4 sm:mt-5 h-1 w-10 rounded-full bg-stats-accent-base transition-all duration-300 group-hover:w-16 group-hover:bg-stats-accent-hover" />
               </motion.div>
             ))}
           </div>
@@ -78,7 +70,7 @@ function StatsCTA() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.35 }}
             transition={{ duration: 0.65, ease: "easeOut" }}
-            className="relative rounded-[32px] overflow-hidden min-h-[500px] shadow-[0_20px_60px_rgba(0,0,0,0.5)] border border-white/[0.08]"
+            className="relative min-h-[300px] sm:min-h-[400px] lg:min-h-[500px] overflow-hidden rounded-[24px] sm:rounded-[32px] border border-stats-border shadow-stats-video"
           >
             <video
               src="/construction.mp4"
@@ -87,11 +79,10 @@ function StatsCTA() {
               loop
               playsInline
               preload="auto"
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 h-full w-full object-cover"
             />
 
-            {/* Simple Dark Overlay - No Gradient */}
-            <div className="absolute inset-0 bg-black/30"></div>
+            <div className="absolute inset-0 bg-stats-video-overlay" />
           </motion.div>
         </div>
       </div>
