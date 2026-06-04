@@ -41,7 +41,7 @@ const dotPositions = [65, 195, 325, 455, 575, 705, 835, 945];
 
 export default function NVQByTrade() {
   return (
-    <section className="relative overflow-hidden bg-nvq-bg py-24 text-foreground transition-colors duration-500">
+    <section className="relative overflow-hidden bg-nvq-bg py-20 sm:py-24 text-foreground transition-colors duration-500">
       
       {/* Background glow */}
       <div className="absolute left-1/2 top-[48%] h-72 w-72 -translate-x-1/2 rounded-full bg-glow-primary blur-3xl" />
@@ -54,19 +54,19 @@ export default function NVQByTrade() {
           initial={{ opacity: 0, y: -8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mx-auto mb-5 flex w-fit items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1 text-xs font-semibold uppercase tracking-wide text-primary-text"
+          className="mx-auto mb-4 sm:mb-5 flex w-fit items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1 text-xs font-bold uppercase tracking-wide text-primary-text shadow-sm backdrop-blur-md"
         >
           <Zap className="h-3.5 w-3.5" />
           NVQ Trades
         </motion.div>
 
         {/* Header */}
-        <div className="mx-auto mb-14 max-w-4xl text-center">
+        <div className="mx-auto mb-10 sm:mb-14 max-w-4xl text-center">
           <motion.h2
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-6xl"
+            className="text-3xl font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-6xl"
           >
             Choose your NVQ trade
           </motion.h2>
@@ -76,18 +76,18 @@ export default function NVQByTrade() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="mt-4 text-base text-muted sm:text-lg"
+            className="mt-4 text-sm text-muted sm:text-base md:text-lg max-w-2xl mx-auto"
           >
             One platform, multiple construction qualifications. Start with your
             trade and connect directly to the right NVQ route.
           </motion.p>
         </div>
 
-        {/* Visual Container (Height un-constrained on mobile to prevent squishing) */}
-        <div className="relative mx-auto h-auto pb-10 sm:h-[470px] sm:pb-0 max-w-5xl">
+        {/* Visual Container (Responsive heights) */}
+        <div className="relative mx-auto h-auto pb-4 sm:h-[470px] sm:pb-0 max-w-5xl">
           
-          {/* Trade icons row */}
-          <div className="relative z-20 grid grid-cols-4 gap-4 sm:grid-cols-8">
+          {/* Trade Icons Grid (2 Cols on Mobile, 8 Cols on Desktop) */}
+          <div className="relative z-20 grid grid-cols-2 gap-3 sm:grid-cols-8 sm:gap-4">
             {trades.map((trade, index) => (
               <motion.div
                 key={trade.title}
@@ -95,7 +95,7 @@ export default function NVQByTrade() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 + index * 0.05 }}
-                className="group flex flex-col items-center gap-3"
+                className="group flex flex-row sm:flex-col items-center gap-3 rounded-2xl border border-border bg-surface p-3 shadow-sm sm:rounded-none sm:border-transparent sm:bg-transparent sm:p-0 sm:shadow-none"
               >
                 <motion.div
                   animate={{
@@ -113,17 +113,18 @@ export default function NVQByTrade() {
                     ],
                   }}
                   transition={{ duration: 6, delay: index * 0.32, repeat: Infinity, ease: "easeInOut" }}
-                  className="rounded-xl border bg-transparent"
+                  className="rounded-xl border bg-transparent shrink-0"
                 >
                   <Link
                     href="#"
-                    className="flex h-14 w-14 items-center justify-center rounded-xl border border-transparent bg-surface transition-all hover:border-primary/70 hover:bg-primary/10 shadow-sm"
+                    className="flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-xl border border-transparent bg-background sm:bg-surface transition-all hover:border-primary/70 hover:bg-primary/10 shadow-sm"
                   >
-                    <trade.icon className="h-6 w-6 text-muted transition-colors group-hover:text-primary-text" />
+                    <trade.icon className="h-5 w-5 sm:h-6 sm:w-6 text-muted transition-colors group-hover:text-primary-text" />
                   </Link>
                 </motion.div>
 
-                <span className="hidden text-center text-xs font-semibold text-foreground transition-colors group-hover:text-primary-text sm:block">
+                {/* Text is now visible on mobile, aligned next to icon */}
+                <span className="block text-left sm:text-center text-[11px] sm:text-xs font-bold sm:font-semibold text-foreground transition-colors group-hover:text-primary-text leading-tight">
                   {trade.title}
                 </span>
               </motion.div>
@@ -137,14 +138,9 @@ export default function NVQByTrade() {
             fill="none"
             preserveAspectRatio="none"
           >
-            {/* Top dots */}
             {dotPositions.map((x, index) => (
               <motion.circle
-                key={`dot-${index}`}
-                cx={x}
-                cy="12"
-                r="4"
-                fill="var(--nvq-svg-color)"
+                key={`dot-${index}`} cx={x} cy="12" r="4" fill="var(--nvq-svg-color)"
                 animate={{ scale: [1, 1, 1.8, 1], opacity: [0.55, 0.55, 1, 0.75] }}
                 transition={{ duration: 6, delay: index * 0.32, repeat: Infinity, ease: "easeInOut" }}
                 style={{ filter: "var(--nvq-svg-shadow)", transformOrigin: `${x}px 12px` }}
@@ -153,26 +149,15 @@ export default function NVQByTrade() {
 
             {linePaths.map((d, index) => (
               <g key={index}>
-                {/* Faint always-visible base line */}
                 <path d={d} stroke="var(--nvq-svg-faint)" strokeWidth="1.8" strokeLinecap="round" />
-
-                {/* Autoplay drawing line */}
                 <motion.path
-                  d={d}
-                  stroke="var(--nvq-svg-color)"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  animate={{ pathLength: [0, 1, 1, 0], opacity: [0, 1, 1, 0] }}
+                  d={d} stroke="var(--nvq-svg-color)" strokeWidth="2.2" strokeLinecap="round"
+                  initial={{ pathLength: 0, opacity: 0 }} animate={{ pathLength: [0, 1, 1, 0], opacity: [0, 1, 1, 0] }}
                   transition={{ duration: 6, delay: index * 0.32, repeat: Infinity, ease: "easeInOut" }}
                 />
-
-                {/* Moving energy particle */}
                 <motion.circle
-                  r="4"
-                  fill="var(--nvq-svg-color)"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: [0, 1, 1, 0], offsetDistance: ["0%", "100%", "100%", "100%"] }}
+                  r="4" fill="var(--nvq-svg-color)"
+                  initial={{ opacity: 0 }} animate={{ opacity: [0, 1, 1, 0], offsetDistance: ["0%", "100%", "100%", "100%"] }}
                   transition={{ duration: 6, delay: index * 0.32, repeat: Infinity, ease: "easeInOut" }}
                   style={{ offsetPath: `path("${d}")`, filter: "var(--nvq-svg-shadow)" }}
                 />
@@ -198,7 +183,7 @@ export default function NVQByTrade() {
         </div>
 
         {/* Bottom feature line */}
-        <div className="mx-auto mt-2 grid max-w-6xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mx-auto mt-6 sm:mt-2 grid max-w-6xl grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
@@ -206,9 +191,12 @@ export default function NVQByTrade() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 + index * 0.15, duration: 0.45 }}
-              className="flex items-center gap-3"
+              className="flex items-center gap-3 bg-surface sm:bg-transparent border border-border sm:border-transparent p-4 sm:p-0 rounded-2xl sm:rounded-none shadow-sm sm:shadow-none"
             >
-              <feature.icon className="h-5 w-5 text-primary-text" />
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 sm:h-auto sm:w-auto sm:bg-transparent">
+                <feature.icon className="h-5 w-5 text-primary-text" />
+              </div>
+              
               <span className="whitespace-nowrap text-sm font-bold text-foreground">
                 {feature.title}
               </span>
