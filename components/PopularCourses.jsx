@@ -116,7 +116,7 @@ export default function PopularCourses() {
             >
               
               {/* Left Side: Text Content */}
-              <div className="w-full flex flex-col justify-between p-6 md:p-10 lg:p-16 relative z-10 bg-surface min-h-[550px] overflow-y-auto custom-scrollbar">
+              <div className="w-full flex flex-col justify-between p-6 md:p-10 lg:p-16 relative z-10 bg-background min-h-[550px] overflow-y-auto custom-scrollbar">
                 
                 <div className="flex flex-col gap-6 w-full">
                   {/* Giant Watermark Number */}
