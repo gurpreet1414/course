@@ -40,6 +40,10 @@ const paths = [
   },
 ];
 
+// ==========================================
+// SHARED COMPONENTS
+// ==========================================
+
 function AnimatedWords({ text, scrollYProgress, start, middle, end }) {
   const words = text.split(" ");
 
@@ -98,7 +102,6 @@ function CareerSlide({ path, index, scrollYProgress }) {
   const rotateY = useTransform(scrollYProgress, [start, enter, holdStart, holdEnd, end], isFirst ? [0, 0, 0, 0, 10] : [-22, 0, 0, 0, 22]);
   const z = useTransform(scrollYProgress, [start, enter, holdStart, holdEnd, end], isFirst ? [0, 0, 0, 0, 120] : [-420, 0, 0, 0, 260]);
   
-  // Converted to percentages to prevent horizontal overflow on mobile
   const contentX = useTransform(scrollYProgress, [start, enter, holdStart, holdEnd, end], isFirst ? ["-10%", "0%", "0%", "0%", "15%"] : ["-30%", "0%", "0%", "0%", "20%"]);
   const imageX = useTransform(scrollYProgress, [start, enter, holdStart, holdEnd, end], isFirst ? ["10%", "0%", "0%", "0%", "-20%"] : ["30%", "0%", "0%", "0%", "-25%"]);
   
@@ -116,7 +119,6 @@ function CareerSlide({ path, index, scrollYProgress }) {
       className="absolute inset-0 flex items-center will-change-transform"
     >
       <div className="grid w-full grid-cols-1 items-center gap-6 sm:gap-10 lg:gap-12 lg:grid-cols-2">
-        {/* Left Content */}
         <motion.div style={{ x: contentX }} className="order-2 lg:order-1">
           <motion.div
             style={{ opacity: descriptionOpacity, y: descriptionY }}
@@ -164,12 +166,10 @@ function CareerSlide({ path, index, scrollYProgress }) {
               View Courses
               <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </button>
-
             <span className="text-xs sm:text-sm font-semibold text-foreground">{path.cardName}</span>
           </motion.div>
         </motion.div>
 
-        {/* Right Image Card */}
         <div className="order-1 flex justify-center lg:order-2 lg:justify-end">
           <motion.div
             style={{ x: imageX, scale: imageScale, rotateX: imageRotateX, rotateY: imageRotateY, rotateZ: imageRotateZ, transformPerspective: 1200, transformStyle: "preserve-3d" }}
@@ -177,7 +177,7 @@ function CareerSlide({ path, index, scrollYProgress }) {
           >
             <motion.div
               animate={{ y: [0, -10, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="relative h-full w-full overflow-hidden rounded-[1.5rem] sm:rounded-[2rem] shadow-xl dark:shadow-none"
+              className="relative h-full w-full overflow-hidden rounded-[1.5rem] sm:rounded-[2rem]"
             >
               <Image src={path.image} alt={path.cardName} fill className="object-cover" priority={index === 0} />
             </motion.div>
@@ -219,9 +219,11 @@ function CareerProgress({ scrollYProgress }) {
   );
 }
 
-function CareerPath() {
+// ==========================================
+// DESKTOP LAYOUT (Sticky + 3D Scroll)
+// ==========================================
+function DesktopCareerPath() {
   const sectionRef = useRef(null);
-
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
   const smoothScrollProgress = useSpring(scrollYProgress, { stiffness: 70, damping: 24, mass: 0.35 });
 
@@ -230,11 +232,9 @@ function CareerPath() {
       <div className="sticky top-0 flex min-h-screen items-center justify-center overflow-hidden py-8 sm:py-16">
         <FloatingBackground scrollYProgress={smoothScrollProgress} />
 
-        {/* Dynamic height mapping fixes the vertical clipping on mobile */}
         <div className="container relative mx-auto h-[88vh] min-h-[580px] max-h-[800px] px-4 sm:px-6 lg:px-8">
-          
           <motion.div
-            style={{ y: useTransform(smoothScrollProgress, [0, 1], [0, -120]), opacity: useTransform(smoothScrollProgress, [0, 0.12], [1, 0]) }}
+            style={{ y: useTransform(smoothScrollProgress, [0, 0.12], [0, -120]), opacity: useTransform(smoothScrollProgress, [0, 0.12], [1, 0]) }}
             className="absolute left-4 sm:left-6 lg:left-8 top-0 z-20"
           >
             <div className="mb-1 sm:mb-3 flex items-center gap-2">
@@ -246,7 +246,6 @@ function CareerPath() {
             </h2>
           </motion.div>
 
-          {/* Adjusted padding top so content clears the header correctly on small screens */}
           <div className="relative h-full pt-16 sm:pt-24 lg:pt-28" style={{ perspective: "1400px", transformStyle: "preserve-3d" }}>
             {paths.map((path, index) => (
               <CareerSlide key={path.cardName} path={path} index={index} scrollYProgress={smoothScrollProgress} />
@@ -260,4 +259,101 @@ function CareerPath() {
   );
 }
 
-export default CareerPath;
+// ==========================================
+// MOBILE LAYOUT (Stacked + Fade In)
+// ==========================================
+function MobileCareerPath() {
+  return (
+    <section className="relative mt-12 overflow-hidden bg-section-bg px-4 py-16 sm:mt-20 sm:px-6 sm:py-20">
+      {/* Static ambient background for mobile */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-40">
+        <div className="absolute -left-24 top-24 h-72 w-72 rounded-full bg-glow-primary blur-3xl" />
+        <div className="absolute -right-24 bottom-20 h-96 w-96 rounded-full bg-glow-secondary blur-3xl" />
+      </div>
+
+      <div className="container relative z-10 mx-auto flex flex-col gap-18">
+        {/* Header */}
+        <div className="mb-2">
+          <div className="mb-3 flex items-center gap-2">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-primary-text sm:text-xs">Your Career Path</span>
+            <CheckCircle2 className="h-3 w-3 text-primary-text sm:h-4 sm:w-4" />
+          </div>
+          <h2 className="text-3xl font-extrabold leading-tight text-foreground sm:text-4xl">
+            One Path. Many Opportunities.
+          </h2>
+        </div>
+
+        {/* Cards Stack */}
+        {paths.map((path, index) => (
+          <motion.div
+            key={path.cardName}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="flex flex-col gap-6 sm:gap-8"
+          >
+            {/* Image Box */}
+            <div className="relative aspect-[1.58] w-full">
+              <Image src={path.image} alt={path.cardName} fill className="object-cover" priority={index === 0} />
+              <div className="absolute -right-2 -top-2 rounded-full bg-primary px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-primary-fg shadow-[0_0_20px_var(--shadow-primary)] sm:-right-4 sm:-top-4 sm:px-5 sm:py-3 sm:text-xs">
+                {path.title}
+              </div>
+            </div>
+
+            {/* Content Box */}
+            <div>
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-glass-border bg-glass-surface px-4 py-1.5 shadow-lg backdrop-blur-md sm:mb-6 sm:px-5 sm:py-2">
+                <Sparkles className="h-3.5 w-3.5 text-primary-text sm:h-4 sm:w-4" />
+                <span className="text-[10px] font-bold uppercase tracking-widest text-primary-text sm:text-xs">{path.level}</span>
+                <CheckCircle2 className="h-3.5 w-3.5 text-primary-text sm:h-4 sm:w-4" />
+              </div>
+
+              <h3 className="mb-3 text-3xl font-extrabold text-foreground sm:text-4xl">{path.title}</h3>
+
+              <p className="mb-6 text-sm font-medium leading-relaxed text-foreground opacity-90 sm:mb-8 sm:text-lg sm:leading-8">
+                {path.description}
+              </p>
+
+              <div className="mb-8 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
+                {path.points.map((point) => (
+                  <div key={point} className="flex items-center gap-2 rounded-xl border border-glass-border bg-glass-surface/80 p-3 backdrop-blur-md sm:rounded-2xl sm:p-4">
+                    <CheckCircle2 className="h-4 w-4 shrink-0 text-primary-text sm:h-5 sm:w-5" />
+                    <p className="text-xs font-bold text-foreground sm:text-sm">{point}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+                <button className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-xs font-semibold text-primary-fg shadow-[0_0_20px_var(--shadow-primary)] transition-all duration-300 hover:scale-105 hover:bg-primary-hover sm:px-8 sm:py-4 sm:text-sm">
+                  View Courses
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1 sm:h-4 sm:w-4" />
+                </button>
+                <span className="text-xs font-semibold text-foreground sm:text-sm">{path.cardName}</span>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// ==========================================
+// MAIN EXPORT CONTROLLER
+// ==========================================
+export default function CareerPath() {
+  return (
+    <>
+      {/* Shown on small screens, hidden on large screens */}
+      <div className="block lg:hidden">
+        <MobileCareerPath />
+      </div>
+
+      {/* Hidden on small screens, shown on large screens */}
+      <div className="hidden lg:block">
+        <DesktopCareerPath />
+      </div>
+    </>
+  );
+}

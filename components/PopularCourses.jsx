@@ -106,7 +106,7 @@ export default function PopularCourses() {
           return (
             <div 
               key={course.title}
-              className="sticky w-full flex flex-col lg:flex-row bg-background border border-border shadow-stack rounded-[2rem] md:rounded-[3rem] overflow-hidden group"
+              className="sticky w-full flex flex-col lg:flex-row bg-surface border border-border shadow-stack rounded-[2rem] md:rounded-[3rem] overflow-hidden group"
               style={{ 
                 top: `calc(10vh + ${index * 40}px)`, 
                 height: 'auto',
@@ -116,7 +116,7 @@ export default function PopularCourses() {
             >
               
               {/* Left Side: Text Content */}
-              <div className="w-full lg:w-[55%] flex flex-col justify-between p-6 md:p-10 lg:p-16 relative z-10 bg-surface overflow-y-auto custom-scrollbar">
+              <div className="w-full flex flex-col justify-between p-6 md:p-10 lg:p-16 relative z-10 bg-surface min-h-[550px] overflow-y-auto custom-scrollbar">
                 
                 <div className="flex flex-col gap-6 w-full">
                   {/* Giant Watermark Number */}
@@ -134,7 +134,7 @@ export default function PopularCourses() {
                       </h3>
                     </div>
                     
-                    <p className="text-base md:text-lg font-medium leading-relaxed text-muted max-w-xl">
+                    <p className="text-base md:text-lg font-medium leading-relaxed text-muted max-w-4xl">
                       {course.description}
                     </p>
 
@@ -183,11 +183,9 @@ export default function PopularCourses() {
               </div>
 
               {/* Right Side: Image Cover */}
-              <div className="relative w-full lg:w-[45%] h-[30vh] min-h-[250px] lg:h-auto lg:min-h-full overflow-hidden bg-muted/20">
-                {/* Subtle inset shadow to blend the image border */}
+              {/* <div className="relative w-full lg:w-[45%] h-[30vh] min-h-[250px] lg:h-auto lg:min-h-full overflow-hidden bg-muted/20">
                 <div className="absolute inset-0 z-10 shadow-[inset_10px_0_30px_rgba(0,0,0,0.08)] dark:shadow-[inset_10px_0_30px_rgba(0,0,0,0.5)] hidden lg:block pointer-events-none" />
                 
-                {/* Image Gradient Overlays to preserve legibility and blending */}
                 <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/40 via-transparent to-transparent lg:hidden" />
                 
                 <Image
@@ -196,7 +194,7 @@ export default function PopularCourses() {
                   fill
                   className="object-cover object-center transition-transform duration-1000 ease-[0.25,1,0.5,1] group-hover:scale-105"
                 />
-              </div>
+              </div> */}
 
             </div>
           );
